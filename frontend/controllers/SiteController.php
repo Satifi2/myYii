@@ -68,6 +68,14 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionFirstPage()
+    {
+        Yii::trace("First Page is called.");
+        error_log("First Page is called.");
+        // 这里放置渲染视图的代码
+        return $this->render('firstpage');
+    }    
+
     /**
      * Displays homepage.
      *
