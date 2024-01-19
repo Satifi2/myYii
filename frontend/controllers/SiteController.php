@@ -15,6 +15,8 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\User;
+// 注意不是use frontend\models\User;
 
 /**
  * Site controller
@@ -89,7 +91,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        // return $this->render('index');
+        $firstUser = User::find()->orderBy('id')->one(); // 获取第一个用户
+
+        // 渲染视图并传递数据
+        return $this->render('index', ['firstUser' => $firstUser]);
     }
 
     /**
