@@ -1,7 +1,7 @@
 <?php
 
 /** @var yii\web\View $this */
-
+use yii\helpers\Html;
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
@@ -10,7 +10,8 @@ $this->title = 'My Yii Application';
             <h1 class="display-4">在前端的视图层可以修改每一个site的文字!例如,index主页的文字</h1>
             <p class="fs-5 fw-light">这个就是最单纯的html</p>
             <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">点击这个按钮可以跳转yiiframework是因为a标签</a></p>
-        
+            <!-- 显示用户名 -->
+            <p>First user's username: <?= Html::encode($firstUser->username) ?></p>
         </div>
     </div>
 
