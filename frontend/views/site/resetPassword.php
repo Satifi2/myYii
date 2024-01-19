@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-reset-password">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please choose your new password:</p>
+    <p>似乎无法通过url=http://localhost/advanced/frontend/web/index.php?r=site%2Fpassword-reset进入</p>
 
     <div class="row">
         <div class="col-lg-5">
