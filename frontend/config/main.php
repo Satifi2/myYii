@@ -41,7 +41,6 @@ return [
         //     'enablePrettyUrl' => true,
         //     'showScriptName' => false,
         //     'rules' => [
-        //         'site/firstpage' => 'site/firstpage',
         //     ],
         // ],
         

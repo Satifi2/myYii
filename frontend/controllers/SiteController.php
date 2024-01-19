@@ -68,12 +68,18 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionFirstPage()
+    public function actionFirstpage()
     {
         Yii::trace("First Page is called.");
         error_log("First Page is called.");
         // 这里放置渲染视图的代码
         return $this->render('firstpage');
+    }    
+
+    public function actionNew()
+    {
+        // 这里放置渲染视图的代码
+        return $this->render('new');
     }    
 
     /**
@@ -151,6 +157,8 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+        Yii::trace("About Page is called.");
+        error_log("About Page is called.");
         return $this->render('about');
     }
 
