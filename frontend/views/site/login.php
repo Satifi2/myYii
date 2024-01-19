@@ -7,7 +7,7 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Login';
+$this->title = '这里的tilte同时对应两处';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
