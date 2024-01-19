@@ -16,6 +16,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\User;
+use app\models\Migration;
+
 // 注意不是use frontend\models\User;
 
 /**
@@ -163,9 +165,12 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        Yii::trace("About Page is called.");
-        error_log("About Page is called.");
-        return $this->render('about');
+        // Yii::trace("About Page is called.");
+        // error_log("About Page is called.");
+        $firstMigration=Migration::find()->orderBy('version')->One();
+        return $this->render('about', [
+            'migration' => $firstMigration,
+        ]);
     }
 
     /**
