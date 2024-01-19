@@ -38,6 +38,7 @@ AppAsset::register($this);
         ['label' => '自己写链接名字', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => '跳转到任意位置', 'url' => ['/site/error']],
+        ['label' => 'First Page', 'url' => ['/site/firstpage']], // 添加 First Page 导航选项
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
