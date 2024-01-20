@@ -18,6 +18,7 @@ use frontend\models\ContactForm;
 use common\models\User;
 use app\models\Migration;
 use app\models\Japannuclearnews;
+use app\models\radiationlevels;
 
 /**
  * Site controller
@@ -83,9 +84,10 @@ class SiteController extends Controller
     {
         // 获取数据库表中的数据
         $newsData = JapanNuclearNews::find()->all();
+        $radiationData = radiationlevels::find()->all();
     
         // 渲染视图，并将数据传递给视图
-        return $this->render('new', ['newsData' => $newsData]);
+        return $this->render('new', ['newsData' => $newsData,'radiationData'=>$radiationData]);
     }
 
     /**
