@@ -567,3 +567,8 @@ var option = {
 // 使用配置项设置雷达图
 myChart.setOption(option);
 </script>
+
+
+
+<iframe src="https://jciv.iidj.net/map/" name="ifd" height="700px" width="100%" scrolling="no" frameborder="0"></iframe>
+    <iframe src="https://data.rmtc.org.cn/gis/PubIndex.html#" name="ifd" height="700px" width="100%" scrolling="no" frameborder="0"></iframe>
