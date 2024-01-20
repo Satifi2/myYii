@@ -14,9 +14,8 @@ $this->title = 'My Yii Application';
             <p>First user's username: <?= Html::encode($firstUser->username) ?></p>
         </div>
     </div>
-
+    
     <div class="body-content">
-
         <div class="row">
             <div class="col-lg-4">
                 <h2>下面的话也是单纯的html</h2>
