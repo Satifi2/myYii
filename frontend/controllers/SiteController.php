@@ -17,8 +17,7 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\User;
 use app\models\Migration;
-
-// 注意不是use frontend\models\User;
+use app\models\Japannuclearnews;
 
 /**
  * Site controller
@@ -82,9 +81,12 @@ class SiteController extends Controller
 
     public function actionNew()
     {
-        // 这里放置渲染视图的代码
-        return $this->render('new');
-    }    
+        // 获取数据库表中的数据
+        $newsData = JapanNuclearNews::find()->all();
+    
+        // 渲染视图，并将数据传递给视图
+        return $this->render('new', ['newsData' => $newsData]);
+    }
 
     /**
      * Displays homepage.
