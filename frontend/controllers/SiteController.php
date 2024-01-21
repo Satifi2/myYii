@@ -27,6 +27,7 @@ use app\models\Migration;
 use app\models\Japannuclearnews;
 use app\models\radiationlevels;
 use app\models\Mynews;
+use app\models\Radiantdata;
 
 /**
  * Site controller
@@ -93,7 +94,7 @@ class SiteController extends Controller
         $radiationData = radiationlevels::find()->all();
         // 从MyNews表中选择第十个到第二十个数据
         $MyNews = MyNews::find()->offset(10)->limit(9)->all();
-
+        $Radiantdata =Radiantdata::find()->limit(10)->all();
 
         if (!Yii::$app->user->isGuest) {
             Yii::$app->session->setFlash('login', 'Already log in.');
@@ -116,6 +117,7 @@ class SiteController extends Controller
             'model' => $model, 'radiationData' => $radiationData,
             'JapanNuclearNews' => $JapanNuclearNews,
             'MyNews' => $MyNews,
+            'Radiantdata'=>$Radiantdata
         ]);
     }
 
