@@ -272,7 +272,7 @@ use yii\bootstrap5\Html;
 					<li>
 						<a href=#>
 							<i class="linecons-star"></i>
-							<span class="title">个人作业3开源建站工具初试文档</span>
+							<span class="title">个人作业3开源建站</span>
 						</a>
 						<ul>
 							<li>
@@ -300,13 +300,19 @@ use yii\bootstrap5\Html;
 					<li>
 						<a href="index.php?r=team-members">
 							<i class="linecons-star"></i>
-							<span class="title">小组成员信息管理</span>
+							<span class="title">成员信息管理</span>
 						</a>
 					</li>
 					<li>
 						<a href="index.php?r=suggestion">
 							<i class="linecons-star"></i>
 							<span class="title">评论管理</span>
+						</a>
+					</li>
+					<li>
+						<a href="index.php?r=user">
+							<i class="linecons-star"></i>
+							<span class="title">用户管理</span>
 						</a>
 					</li>
 				</ul>
