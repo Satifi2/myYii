@@ -18,10 +18,10 @@ $this->title = $name;
     </div>
 
     <p>
-        如何进入这个页面呢?
+        The above error occurred while the Web server was processing your request.
     </p>
     <p>
-        只需要/advanced/frontend/web/index.php?r=site%2Ferror就行了
+        Please contact us if you think this is a server error. Thank you.
     </p>
 
 </div>

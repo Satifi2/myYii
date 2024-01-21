@@ -7,11 +7,10 @@ use yii\helpers\Html;
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>对于这里基本的语法我已经理解了,about类似于index页面</p>
-    <p>First version's name: <?= Html::encode($migration->version) ?></p>
+    <p>This is the About page. You may modify the following file to customize its content:</p>
+
     <code><?= __FILE__ ?></code>
 </div>

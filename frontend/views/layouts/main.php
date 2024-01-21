@@ -35,11 +35,9 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => '自己写链接名字', 'url' => ['/site/index']],
+        ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => '跳转到任意位置', 'url' => ['/site/error']],
-        ['label' => '就是加一个跳转', 'url' => ['/site/firstpage']], // 添加 First Page 导航选项
-        ['label' => 'new', 'url' => ['/site/new']]
+        ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -50,7 +48,6 @@ AppAsset::register($this);
         'items' => $menuItems,
     ]);
     if (Yii::$app->user->isGuest) {
-        echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
         echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
     } else {
         echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
@@ -68,16 +65,16 @@ AppAsset::register($this);
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>这里有时候可以插入一个面包屑导航栏
+        ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>整个页面是通过$content进行显示的
+        <?= $content ?>
     </div>
 </main>
 
 <footer class="footer mt-auto py-3 text-muted">
-    <div class="container">用bootstrap的样式来实现底部放置的
-        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?>这里可以插入名字和时间</p>
-        <p class="float-end"><?= Yii::powered() ?>这里可以插入Yii::powered()</p>
+    <div class="container">
+        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        <p class="float-end"><?= Yii::powered() ?></p>
     </div>
 </footer>
 

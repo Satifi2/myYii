@@ -18,10 +18,10 @@ $this->title = $name;
     </div>
 
     <p>
-        错误页面也是完全一样的
+        The above error occurred while the Web server was processing your request.
     </p>
     <p>
-        通过不同网址显示不同页面
+        Please contact us if you think this is a server error. Thank you.
     </p>
 
 </div>

@@ -1,4 +1,9 @@
 <?php
+/**
+ *  Team: BaoSha
+ *  Coding by 李星谊 2113601  1/16
+ *  NuclearPollution frontend
+ */
 
 namespace frontend\controllers;
 
@@ -15,10 +20,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use common\models\User;
-use app\models\Migration;
-use app\models\Japannuclearnews;
-use app\models\radiationlevels;
+use frontend\models\Suggestion;
 
 /**
  * Site controller
@@ -50,7 +52,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -72,24 +74,6 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionFirstpage()
-    {
-        Yii::trace("First Page is called.");
-        error_log("First Page is called.");
-        // 这里放置渲染视图的代码
-        return $this->render('firstpage');
-    }    
-
-    public function actionNew()
-    {
-        // 获取数据库表中的数据
-        $newsData = JapanNuclearNews::find()->all();
-        $radiationData = radiationlevels::find()->all();
-    
-        // 渲染视图，并将数据传递给视图
-        return $this->render('new', ['newsData' => $newsData,'radiationData'=>$radiationData]);
-    }
-
     /**
      * Displays homepage.
      *
@@ -97,12 +81,31 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        // return $this->render('index');
-        $firstUser = User::find()->orderBy('id')->one(); // 获取第一个用户
-        $radiationData = radiationlevels::find()->all();
+        $model = new Suggestion();
+        $model->id=Suggestion::find()->count();
 
-        // 渲染视图并传递数据
-        return $this->render('index', ['firstUser' => $firstUser,'radiationData'=>$radiationData]);
+        if (!Yii::$app->user->isGuest) {
+            Yii::$app->session->setFlash('login', 'Already log in.');
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success_save', 'Thank you for your suggestion.');
+                return $this->goHome();
+            }
+        }
+        else {
+            if ($model->load(Yii::$app->request->post())) {
+                Yii::$app->session->setFlash('login', 'Have not logged in.');
+            }
+            else {
+                Yii::$app->session->setFlash('login', ' ');
+            }
+        }
+
+        $model->username = '';
+        $model->email = '';
+        $model->suggestion = '';
+        return $this->renderPartial('index', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -117,13 +120,13 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) || $model->login()) {
-            return $this->goHome();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
         }
 
-        $model->password = '123';
+        $model->password = '';
 
-        return $this->render('login', [
+        return $this->renderPartial('login', [
             'model' => $model,
         ]);
     }
@@ -170,12 +173,7 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        // Yii::trace("About Page is called.");
-        // error_log("About Page is called.");
-        $firstMigration=Migration::find()->orderBy('version')->One();
-        return $this->render('about', [
-            'migration' => $firstMigration,
-        ]);
+        return $this->render('about');
     }
 
     /**
@@ -191,7 +189,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        return $this->render('signup', [
+        return $this->renderPartial('signup', [
             'model' => $model,
         ]);
     }
@@ -287,5 +285,14 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    /**
+     * Creates a new Message model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
     }
 }

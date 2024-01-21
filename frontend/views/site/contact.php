@@ -15,9 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-    下面的这个表单如果无法显示出来，需要修改ini.PHP文件,然后重启XAMPP。
-    PHP当中要创建一个表单还是相对比较容易的。在yii这个框架下可以通过?php ?里面嵌套ActiveForm，内部??里面嵌套field方法
-    来创建一个表单。这个表单的样式是通过bootstrap来实现的。所以需要引入bootstrap的样式。
+        If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.
     </p>
 
     <div class="row">
