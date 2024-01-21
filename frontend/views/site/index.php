@@ -341,11 +341,11 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
     </section>
 
     <section id="about-us" class="white section-wrapper">
-    <div style="text-align: center;">
+        <div style="text-align: center;">
             <h2 style="font-weight: bold;">radiation levels</h2>
             <p style="color: gray; font-size: 15px;">此数据来自于数据库表 "radiation levels"</p>
         </div>
-        <table class="table table-bordered" style="width: 70%; margin: 0 auto; margin-top: 20px; margin-bottom: 0px;">
+        <table class="table table-bordered" style="width: 70%; margin: 0 auto; margin-top: 40px; margin-bottom: 20px;">
             <thead>
                 <tr>
                     <th>Region</th>
@@ -365,66 +365,480 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </section>
 
-    <section class="white echarts" id="losses">
+        <style>
+            /* 父元素样式 */
+            .chart-container {
+                display: flex;
+                flex-wrap: wrap;
+                /* 换行 */
+                justify-content: space-evenly;
+                /* 每行两个元素，平均分布 */
+                text-align: center;
+                /* 文字居中 */
+                margin-top: 20px;
+                /* 顶部边距 */
+            }
 
-        <div class="section-inner echarts">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 wow fadeInDown">
-                        <h2 class="section-heading"> <strong></strong> </h2>
-                        <h3 class="section-subheading text-muted"></h3>
-                    </div>
-                </div>
-            </div>
-            <div id="filters-container" class="cbp-l-filters-work container">
-                <div data-filter=".casualty" class="btn btn-theme cbp-filter-item-active cbp-filter-item c">
-                    <span></span>
-                </div>
-                <div data-filter=".weapons-ratio" class="btn btn-theme cbp-filter-item r">
-                    weapons ratio
-                </div>
-                <div data-filter=".weapons-loss" class="btn btn-theme cbp-filter-item l">
-                    weapons loss
-                </div>
-                <div data-filter=".company-propotion" class="btn btn-theme cbp-filter-item p">
-                    company proportion
-                </div>
-            </div>
-            <div id="grid-container" class="cbp-l-grid-work">
-                <div class="cbp-item casualty">
-                    <div class="row1">
-                        <div class="echarts-item">
-                            <div id="echarts1" style="width:1000px ; height: 600px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cbp-item weapons-ratio " id="r">
-                    <div class="row1">
-                        <div class="echarts-item">
-                            <div id="echarts2" style="width:1000px ; height:600px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cbp-item weapons-loss " id="l">
-                    <div class="row1">
-                        <div class="echarts-item">
-                            <div id="echarts3" style="width:1000px ; height:600px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cbp-item company-propotion" id="p">
-                    <div class="row1">
-                        <div class="echarts-item">
-                            <div id="echarts4" style="width:1000px ; height:550px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            /* 图表样式 */
+            .chart {
+                margin: 10px 0;
+                /* 图表之间的垂直间距 */
+            }
+        </style>
+
+        <!-- 引入ECharts库的JavaScript文件，确保路径正确 -->
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+
+        <div class="chart-container">
+            <!-- 创建一个具有指定ID的容器用于显示散点图 -->
+            <div id="scatterChart" style="width: 800px; height: 400px;"></div>
+            <!-- 创建一个具有指定ID的容器用于显示雷达图 -->
+            <div id="radarChart" style="width: 800px; height: 400px;"></div>
+            <!-- 创建一个具有指定ID的容器用于显示条形图 -->
+            <div id="barChart" style="width: 800px; height: 400px;"></div>
+            <!-- 创建一个具有指定ID的容器用于显示环形饼图 -->
+            <div id="ringPieChart" style="width: 800px; height: 400px;"></div>
         </div>
+
+        <script>
+            // 获取包含数据的 JavaScript 对象
+            var data = [{
+                    Region: 'Tokyo, Japan',
+                    'Radiation Dose Rate': 0.12,
+                    'Monitoring Time': '2022-01-15 08:00:00'
+                },
+                {
+                    Region: 'Chernobyl, Ukraine',
+                    'Radiation Dose Rate': 0.78,
+                    'Monitoring Time': '2022-01-15 12:30:00'
+                },
+                {
+                    Region: 'Los Angeles, USA',
+                    'Radiation Dose Rate': 0.10,
+                    'Monitoring Time': '2022-01-15 14:15:00'
+                },
+                {
+                    Region: 'Sellafield, UK',
+                    'Radiation Dose Rate': 0.25,
+                    'Monitoring Time': '2022-01-15 10:45:00'
+                },
+                {
+                    Region: 'Savannah River, USA',
+                    'Radiation Dose Rate': 0.18,
+                    'Monitoring Time': '2022-01-15 16:20:00'
+                },
+                {
+                    Region: 'Seversk, Russia',
+                    'Radiation Dose Rate': 0.15,
+                    'Monitoring Time': '2022-01-15 11:10:00'
+                },
+                {
+                    Region: 'Fukushima, Japan',
+                    'Radiation Dose Rate': 0.30,
+                    'Monitoring Time': '2022-01-15 09:55:00'
+                },
+                {
+                    Region: 'Paris, France',
+                    'Radiation Dose Rate': 0.08,
+                    'Monitoring Time': '2022-01-15 13:40:00'
+                },
+                {
+                    Region: 'Beijing, China',
+                    'Radiation Dose Rate': 0.09,
+                    'Monitoring Time': '2022-01-15 15:05:00'
+                },
+                {
+                    Region: 'Sydney, Australia',
+                    'Radiation Dose Rate': 0.11,
+                    'Monitoring Time': '2022-01-15 17:30:00'
+                }
+            ];
+
+            // 获取图表容器
+            var chartContainer = document.getElementById('scatterChart');
+
+            // 创建 ECharts 实例
+            var myChart = echarts.init(chartContainer);
+
+            // 提取Radiation Dose Rate 作为纵轴数据，Monitoring Time 作为横轴数据
+            var xAxisData = data.map(item => item['Monitoring Time']);
+            var yAxisData = data.map(item => item['Radiation Dose Rate']);
+
+            // 配置散点图选项
+            var option = {
+                title: {
+                    text: 'Radiation Dose Rate vs. Monitoring Time (Scatter Plot)',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 16
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: '{b}: {c}',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: xAxisData,
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 45
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'Radiation Dose Rate',
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                series: [{
+                    data: yAxisData,
+                    type: 'scatter'
+                }]
+            };
+
+            // 使用配置项设置散点图
+            myChart.setOption(option);
+        </script>
+
+
+        <!-- 引入ECharts库的JavaScript文件，确保路径正确 -->
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+
+
+
+        <script>
+            // 获取包含数据的 JavaScript 对象
+            var data = [{
+                    Region: 'Tokyo, Japan',
+                    'Radiation Dose Rate': 0.12
+                },
+                {
+                    Region: 'Chernobyl, Ukraine',
+                    'Radiation Dose Rate': 0.78
+                },
+                {
+                    Region: 'Los Angeles, USA',
+                    'Radiation Dose Rate': 0.10
+                },
+                {
+                    Region: 'Sellafield, UK',
+                    'Radiation Dose Rate': 0.25
+                },
+                {
+                    Region: 'Savannah River, USA',
+                    'Radiation Dose Rate': 0.18
+                },
+                {
+                    Region: 'Seversk, Russia',
+                    'Radiation Dose Rate': 0.15
+                },
+                {
+                    Region: 'Fukushima, Japan',
+                    'Radiation Dose Rate': 0.30
+                },
+                {
+                    Region: 'Paris, France',
+                    'Radiation Dose Rate': 0.08
+                },
+                {
+                    Region: 'Beijing, China',
+                    'Radiation Dose Rate': 0.09
+                },
+                {
+                    Region: 'Sydney, Australia',
+                    'Radiation Dose Rate': 0.11
+                }
+            ];
+
+            // 获取图表容器
+            var chartContainer = document.getElementById('radarChart');
+
+            // 创建 ECharts 实例
+            var myChart = echarts.init(chartContainer);
+
+            // 提取不同地区的数据
+            var regions = data.map(item => item.Region);
+            var doseRates = data.map(item => item['Radiation Dose Rate']);
+
+            // 配置雷达图选项
+            var option = {
+                title: {
+                    text: 'Radar Chart - Radiation Dose Rate by Region',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 16
+                    }
+                },
+                tooltip: {},
+                radar: {
+                    indicator: regions.map(region => ({
+                        name: region,
+                        max: Math.max(...doseRates)
+                    })),
+                    radius: '65%',
+                    center: ['50%', '50%'],
+                },
+                series: [{
+                    type: 'radar',
+                    data: [{
+                        value: doseRates,
+                        name: 'Radiation Dose Rate',
+                        areaStyle: {
+                            color: 'rgba(255, 0, 0, 0.5)' // 雷达图区域填充颜色
+                        },
+                        lineStyle: {
+                            color: 'red' // 雷达图边框线颜色
+                        },
+                    }, ],
+                }],
+            };
+
+            // 使用配置项设置雷达图
+            myChart.setOption(option);
+        </script>
+
+        <!-- 引入ECharts库的JavaScript文件，确保路径正确 -->
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+
+
+
+        <script>
+            // 获取包含数据的 JavaScript 对象
+            var data = [{
+                    Region: 'Tokyo, Japan',
+                    'Radiation Dose Rate': 0.12
+                },
+                {
+                    Region: 'Chernobyl, Ukraine',
+                    'Radiation Dose Rate': 0.78
+                },
+                {
+                    Region: 'Los Angeles, USA',
+                    'Radiation Dose Rate': 0.10
+                },
+                {
+                    Region: 'Sellafield, UK',
+                    'Radiation Dose Rate': 0.25
+                },
+                {
+                    Region: 'Savannah River, USA',
+                    'Radiation Dose Rate': 0.18
+                },
+                {
+                    Region: 'Seversk, Russia',
+                    'Radiation Dose Rate': 0.15
+                },
+                {
+                    Region: 'Fukushima, Japan',
+                    'Radiation Dose Rate': 0.30
+                },
+                {
+                    Region: 'Paris, France',
+                    'Radiation Dose Rate': 0.08
+                },
+                {
+                    Region: 'Beijing, China',
+                    'Radiation Dose Rate': 0.09
+                },
+                {
+                    Region: 'Sydney, Australia',
+                    'Radiation Dose Rate': 0.11
+                }
+            ];
+
+            // 获取图表容器
+            var chartContainer = document.getElementById('barChart');
+
+            // 创建 ECharts 实例
+            var myChart = echarts.init(chartContainer);
+
+            // 提取Radiation Dose Rate 作为柱形图的数据
+            var yAxisData = data.map(item => item['Radiation Dose Rate']);
+            var xAxisData = data.map(item => item.Region);
+
+            // 配置条形图选项
+            var option = {
+                title: {
+                    text: 'Radiation Dose Rate by Region (Bar Chart)',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 16
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: '{b}: {c}',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: xAxisData,
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 45
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'Radiation Dose Rate',
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                series: [{
+                    data: yAxisData,
+                    type: 'bar',
+                    itemStyle: {
+                        color: function(params) {
+                            // 根据数值不同设置不同深浅的绿色
+                            var colorValue = params.data;
+                            if (colorValue >= 0.7) {
+                                return '#003300'; // 最深墨绿色
+                            } else if (colorValue >= 0.5) {
+                                return '#006600'; // 深墨绿色
+                            } else if (colorValue >= 0.3) {
+                                return '#009900'; // 中墨绿色
+                            } else {
+                                return '#00CC00'; // 浅墨绿色
+                            }
+
+                        }
+                    }
+                }]
+            };
+
+            // 使用配置项设置条形图
+            myChart.setOption(option);
+        </script>
+
+        <!-- 引入ECharts库的JavaScript文件，确保路径正确 -->
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+
+        <script>
+            // 获取包含数据的 JavaScript 对象
+            var data = [{
+                    Region: 'Tokyo, Japan',
+                    'Radiation Dose Rate': 0.12
+                },
+                {
+                    Region: 'Chernobyl, Ukraine',
+                    'Radiation Dose Rate': 0.78
+                },
+                {
+                    Region: 'Los Angeles, USA',
+                    'Radiation Dose Rate': 0.10
+                },
+                {
+                    Region: 'Sellafield, UK',
+                    'Radiation Dose Rate': 0.25
+                },
+                {
+                    Region: 'Savannah River, USA',
+                    'Radiation Dose Rate': 0.18
+                },
+                {
+                    Region: 'Seversk, Russia',
+                    'Radiation Dose Rate': 0.15
+                },
+                {
+                    Region: 'Fukushima, Japan',
+                    'Radiation Dose Rate': 0.30
+                },
+                {
+                    Region: 'Paris, France',
+                    'Radiation Dose Rate': 0.08
+                },
+                {
+                    Region: 'Beijing, China',
+                    'Radiation Dose Rate': 0.09
+                },
+                {
+                    Region: 'Sydney, Australia',
+                    'Radiation Dose Rate': 0.11
+                }
+            ];
+
+            // 获取图表容器
+            var chartContainer = document.getElementById('ringPieChart');
+
+            // 创建 ECharts 实例
+            var myChart = echarts.init(chartContainer);
+
+            // 提取地区和辐射剂量率数据
+            var regionData = data.map(item => item.Region);
+            var doseRateData = data.map(item => item['Radiation Dose Rate']);
+
+            // 配置环形饼图选项
+            var option = {
+                title: {
+                    text: 'Radiation Dose Rate by Region (Ring Pie Chart)',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 16
+                    }
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}: {c} ({d}%)'
+                },
+                series: [{
+                    name: 'Radiation Dose Rate',
+                    type: 'pie',
+                    radius: ['40%', '70%'], // 控制内外圈的半径
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: true,
+                        position: 'outside', // 标签位置在外部
+                        formatter: '{b}: {c}',
+                        fontSize: 12
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '16',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: true,
+                        length2: 10,
+                        lineStyle: {
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    data: doseRateData.map(function(value, index) {
+                        return {
+                            name: regionData[index],
+                            value: value
+                        };
+                    }),
+                    itemStyle: {
+                        color: function(params) {
+                            // 根据数据索引选择不同的颜色
+                            var colorList = ['#FF5733', '#FF8C00', '#FFA500', '#FFD700', '#FFC0CB', '#FF69B4', '#9370DB', '#8A2BE2', '#4B0082', '#2E8B57'];
+                            return colorList[params.dataIndex];
+                        }
+                    }
+                }]
+            };
+
+            // 使用配置项设置环形饼图
+            myChart.setOption(option);
+        </script>
+
+
     </section>
-    
+
+
     <section id="login" class="divider-wrapper-a section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg1.jpg" data-speed="0.7">
         <div class="section-inner">
             <div class="container">
