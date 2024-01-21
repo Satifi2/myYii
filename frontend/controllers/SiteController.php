@@ -87,7 +87,7 @@ class SiteController extends Controller
     {
         $model = new Suggestion();
         $model->id=Suggestion::find()->count();
-        $newsData = JapanNuclearNews::find()->all();
+        $JapanNuclearNews = JapanNuclearNews::find()->all();
         $radiationData = radiationlevels::find()->all();
         
 
@@ -111,7 +111,7 @@ class SiteController extends Controller
         $model->email = '';
         $model->suggestion = '';
         return $this->renderPartial('index', [
-            'model' => $model,'radiationData'=>$radiationData
+            'model' => $model,'radiationData'=>$radiationData,'JapanNuclearNews'=>$JapanNuclearNews
         ]);
     }
 

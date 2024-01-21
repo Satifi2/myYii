@@ -17,6 +17,7 @@ $this->title = 'R-U War intergrade';
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
+use yii\grid\GridView;
 
 if (Yii::$app->session->hasFlash('success_save'))
     echo "<script>alert('" . Yii::$app->session->getFlash('success_save') . "')</script>";
@@ -839,6 +840,62 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
     </section>
 
 
+
+
+    <section id="about-us" style="margin: 20%;">
+        <table class="table table-bordered table-rounded">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Event Date</th>
+                    <th>Location</th>
+                    <th>Headline</th>
+                    <th>News Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($JapanNuclearNews as $newsItem) : ?>
+                    <tr>
+                        <td><?= $newsItem->news_id ?></td>
+                        <td><?= $newsItem->event_date ?></td>
+                        <td><?= $newsItem->location ?></td>
+                        <td><?= $newsItem->headline ?></td>
+                        <td style="white-space: pre-wrap;"><?= $newsItem->news_content ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <style>
+            .card {
+                border: none;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transition: transform 0.2s;
+            }
+
+            .card:hover {
+                transform: scale(1.02);
+            }
+
+            .card-title {
+                font-size: 1.25rem;
+                font-weight: bold;
+            }
+
+            .card-text {
+                font-size: 1rem;
+            }
+
+            .list-group-item {
+                border: none;
+            }
+        </style>
+
+    </section>
+
+
+
     <section id="login" class="divider-wrapper-a section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg1.jpg" data-speed="0.7">
         <div class="section-inner">
             <div class="container">
@@ -1014,7 +1071,6 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
         </div>
         </div>
     </section>
-
 
     <footer id="footerwrap">
         <div class="section-inner">
