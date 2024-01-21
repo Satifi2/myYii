@@ -175,7 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">王健行</a></span>
-                                        <small class="muted">——穿过乌云。</small>
+                                        <small class="muted"></small>
                                     </div>
                                 </div>
                                 <div class="media">
@@ -184,7 +184,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">杨淇</a></span>
-                                        <small class="muted">——carpe diem.</small>
+                                        <small class="muted"></small>
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">李星谊</a></span>
-                                        <small class="muted">——我与我周旋久，宁做我。</small>
+                                        <small class="muted"></small>
                                     </div>
                                 </div>
                                 <div class="media">
@@ -210,7 +210,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">杜怡兴</a></span>
-                                        <small class="muted">——认真工作，早点睡觉。</small>
+                                        <small class="muted"></small>
                                     </div>
                                 </div>
                             </div>

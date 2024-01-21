@@ -31,55 +31,6 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
 }
 ?>
 
-<!--
-<div class="site-index">
-    <div class="p-5 mb-4 bg-transparent rounded-3">
-        <div class="container-fluid py-5 text-center">
-            <h1 class="display-4">Congratulations!</h1>
-            <p class="fs-5 fw-light">You have successfully created your Yii-powered application.</p>
-            <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-        </div>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
-</div>
-
--->
 
 <head>
     <meta charset="utf-8">
@@ -171,88 +122,14 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
         </div>
     </div>
 
-
-    <!-- <div id="main-navigation" class="navbar navbar-inverse navbar-fixed-top smoothtransition fadeInDown sb-slide" data-wow-delay="1s" role="navigation">
-        <div class="container smoothtransition">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <h2><a class="navbar-brand" href="index.php">Baosha</a></h2>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Home <span class="pe-7s-angle-down"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="index.php">Home Agency</a></li>
-                            <li><a href="index-blog.html">Home Blog</a></li>
-                            <li><a href="index-resume.html">Home Resume</a></li>
-                            <li><a href="index-portfolio.html">Home Video</a></li>
-                            <li><a href="index-shop.html">Home Shop</a></li>
-                            <li><a href="index-app.html">Home App Landing</a></li>
-                            <li><a href="index-singlepage.html">Home Single Page</a></li>
-                            <li><a href="index-map.html">Home Map</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Blog <span class="pe-7s-angle-down"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="category-grid.html">Category Grid</a></li>
-                            <li><a href="index.php?r=ru-news">Category Traditional</a></li>
-                            <li><a href="single-post.html">Single Post</a></li>
-                            <li><a href="single-post-fullwidth.html">Single Post Fullwidth</a></li>
-                            <li><a href="single-post-sidebar.html">Single Post Sidebar</a></li>
-                            <li><a href="single-post-gallery.html">Single Post Gallery</a></li>
-                            <li><a href="single-post-lightbox-gallery.html">Single Post Lightbox Gallery</a></li>
-                            <li><a href="single-post-video.html">Single Post Video</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Portfolio <span class="pe-7s-angle-down"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="portfolio-grid.html">Portfolio Grid</a></li>
-                            <li><a href="single-portfolio.html">Single Portfolio</a></li>
-                            <li><a href="single-portfolio-video.html">Single Portfolio Video</a></li>
-                            <li><a href="single-portfolio-large.html">Single Portfolio Fullscreen</a></li>
-                            <li><a href="single-portfolio-video-large.html">Single Portfolio Fullscreen Video</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop <span class="pe-7s-angle-down"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="index-shop.html">Shop</a></li>
-                            <li><a href="single-product.html">Single Product</a></li>
-                            <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pages <span class="pe-7s-angle-down"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="coming-soon.html">Coming Soon</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="contact-us.html">Contact Us</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a id="searchtrigger" href="#"><i class="fa fa-search"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div> -->
-
     <header id="headerwrap" class="fullscreen">
         <div class="vertical-center">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <h3 class="fancy wow fadeInDown" data-wow-delay="1.5s"><span><strong>Baosha</strong></span></h3>
-                        <h1 class="mb30 wow fadeInUp" data-wow-delay="2s">WELCOME TO R-U War</h1>
-                        <a class="page-scroll btn btn-theme btn-lg btn-white wow fadeInUp" data-wow-delay="2.5s" href="#about-us">Take A Look</a>
+                        <h1 class="mb30 wow fadeInUp" data-wow-delay="2s">Nuclear Pollution</h1>
+                        <a class="page-scroll btn btn-theme btn-lg btn-white wow fadeInUp" data-wow-delay="2.5s" href="#about-us">Have A Look</a>
                     </div>
                 </div>
             </div>
@@ -285,14 +162,8 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                             <img src="assets/img/team/h1.jpg" class="img-responsive" alt="image">
                             <figcaption>
                                 <h3><strong>王健行 2111065</strong></h3>
-                                <h2>——穿过乌云。</h2>
+                                <h2></h2>
                                 <p class="icon-links pull-left fullwidth-me text-left">
-                                    <a href="#" class="launch-details"><span class="fa fa-facebook"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-twitter"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-dribbble"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-google-plus"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-envelope"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-info"></span></a>
                                 </p>
                             </figcaption>
                         </figure>
@@ -302,14 +173,8 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                             <img src="assets/img/team/h2.jpg" class="img-responsive" alt="image">
                             <figcaption>
                                 <h3><strong>杨淇 2112893</strong></h3>
-                                <h2>——carpe diem.</h2>
+                                <h2></h2>
                                 <p class="icon-links pull-left fullwidth-me text-left">
-                                    <a href="#" class="launch-details"><span class="fa fa-facebook"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-twitter"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-dribbble"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-google-plus"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-envelope"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-info"></span></a>
                                 </p>
                             </figcaption>
                         </figure>
@@ -319,14 +184,8 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                             <img src="assets/img/team/h3.jpg" class="img-responsive" alt="image">
                             <figcaption>
                                 <h3><strong>李星谊 2113601</strong></h3>
-                                <h2>——我与我周旋久，宁做我。</h2>
+                                <h2></h2>
                                 <p class="icon-links pull-left fullwidth-me text-left">
-                                    <a href="#" class="launch-details"><span class="fa fa-facebook"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-twitter"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-dribbble"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-google-plus"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-envelope"></span></a>
-                                    <a href="#" class="launch-details"><span class="fa fa-info"></span></a>
                                 </p>
                             </figcaption>
                         </figure>
@@ -336,14 +195,8 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                             <img src="assets/img/team/h4.jpg" class="img-responsive" alt="image">
                             <figcaption>
                                 <h3><strong>杜怡兴 2112847</strong></h3>
-                                <h2>——认真工作，早点睡觉。</h2>
+                                <h2></h2>
                                 <p class="icon-links pull-left fullwidth-me text-left">
-                                    <a href="" class="launch-details"><span class="fa fa-facebook"></span></a>
-                                    <a href="" class="launch-details"><span class="fa fa-twitter"></span></a>
-                                    <a href="" class="launch-details"><span class="fa fa-dribbble"></span></a>
-                                    <a href="" class="launch-details"><span class="fa fa-google-plus"></span></a>
-                                    <a href="" class="launch-details"><span class="fa fa-envelope"></span></a>
-                                    <a href="" class="launch-details"><span class="fa fa-info"></span></a>
                                 </p>
                             </figcaption>
                         </figure>
@@ -352,6 +205,8 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
             </div>
         </div>
     </section>
+
+        
 
     <!-- 添加了俄乌战争时间线-->
     <section id="timeline" class="timeline-outer">
@@ -534,15 +389,6 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                 }
                 ?>
             </ul>
-            <!-- <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 wow fadeInDown">
-                        <h2 class="section-heading">
-                            <a href="index.php?r=ru-news" class="btn btn-theme">View All</a>
-                        </h2>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </section>
 
@@ -999,7 +845,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">王健行</a></span>
-                                        <small class="muted">——穿过乌云。</small>
+                                        <small class="muted"></small>
                                     </div>
                                 </div>
                                 <div class="media">
@@ -1008,7 +854,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">杨淇</a></span>
-                                        <small class="muted">——carpe diem.</small>
+                                        <small class="muted"></small>
                                     </div>
                                 </div>
                             </div>
@@ -1025,7 +871,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">李星谊</a></span>
-                                        <small class="muted">——我与我周旋久，宁做我。</small>
+                                        <small class="muted"></small>
                                     </div>
                                 </div>
                                 <div class="media">
@@ -1034,7 +880,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">杜怡兴</a></span>
-                                        <small class="muted">——认真工作，早点睡觉。</small>
+                                        <small class="muted"></small>
                                     </div>
                                 </div>
                             </div>
