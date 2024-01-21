@@ -520,24 +520,6 @@ use yii\bootstrap5\Html;
 				</div>
 
 
-				<!-- <div class="breadcrumb-env">
-
-					<ol class="breadcrumb bc-1">
-						<li>
-							<a href=#><i class="fa-home"></i>Home</a>
-						</li>
-						<li>
-
-							<a href="index.php?r=team-members">Members</a>
-						</li>
-						<li>
-
-							<a href="index.php?r=suggestion">Suggestions</a>
-						</li>
-					</ol>
-				</div>
-			</div> -->
-
 				<!-- 引入ECharts库的JavaScript文件，确保路径正确 -->
 				<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
 

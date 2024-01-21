@@ -25,7 +25,7 @@ use yii\helpers\Url;
 
 if (Yii::$app->session->hasFlash('success_save'))
     echo "<script>alert('" . Yii::$app->session->getFlash('success_save') . "')</script>";
-if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
+if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
     echo "<script>alert('Please log in first!')</script>";
     Url::to(['#login']);
 }
@@ -64,9 +64,9 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
         $(document).ready(function() {
             'use strict';
             jQuery('#headerwrap').backstretch([
-                "assets/img/bg/bg1 (2).jpg",
-                "assets/img/bg/bg2 (2).jpg",
-                "assets/img/bg/bg3 (2).jpg"
+                "assets/img/bg/background1.jpg",
+                "assets/img/bg/background2.jpg",
+                "assets/img/bg/background3.jpg"
             ], {
                 duration: 8000,
                 fade: 800
@@ -147,19 +147,62 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                 </div>
                 <div class="row mb100 wow fadeInUp">
                     <div class="col-md-6">
-                        <p>这个网站是南开大学《互联网数据库开发》课程Baosha小组的小组作业。网站中展现了与俄乌战争有关的<strong>不同数据</strong>，包括<strong>战线图、损失数据图表、时间线及重大事件、纽约时报新闻搬运以及用到的武器展示模块</strong>，并在最后附上了建议与反馈模块。我们以用户体验作为第一指标，选取了合适的网站模板并精心设计布局，保证用户访问网站时得到良好体验的同时，能够获取到一些有用的信息。</p>
-                        <p>我们的小组成员包括：王健行、杨淇、李星谊、杜怡兴（从左到右），您可以将鼠标悬停到对应的头像上，以查看我们的姓名、学号及座右铭。</p>
+                        <p>这个网站是南开大学《互联网数据库开发》课程Baosha小组的小组作业。我们<strong>通过爬虫收集了核污染全面的信息</strong>，通过我们的网站，可以深入了解核污染的各个方面，包括其<strong>后果、各国的反应、紧急响应、环境影响、健康效应、历史事件、最新日本核新闻、人口迁移、监测数据、核设施、核事故、辐射水平、法规以及提供建议的机会</strong>。
+                            我们的网站提供了丰富的信息资源，并通过<strong>柱状图、条形图、折线图、散点图、热力图、箱型图和雷达图等可视化工具</strong>，帮助您更清晰地了解核污染的数据。</p>
+                        <p>我们的小组成员包括：王健行、杨淇、李星谊、杜怡兴（从左到右），可以将鼠标悬停到对应的头像上，来查看名字</p>
                         <p class="mt"><a href="#contact" class="btn btn-primary btn-theme page-scroll">Get In Touch</a></p>
                     </div>
 
                     <div class="col-md-6">
-                        <img src="assets/img/devices.png" class="img-responsive alignright" alt="">
+                        <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+                        <div id="data-chart" style="width: 800px; height: 400px;"></div>
+                        <script>
+                            var data = ['后果', '各国的反应', '紧急响应', '环境影响', '健康效应', '历史事件', '最新日本核新闻', '人口迁移', '监测数据', '核设施', '核事故', '辐射水平', '法规'];
+                            var amount = [14, 21, 12, 8, 9, 15, 30, 32, 50, 42, 13, 21, 6];
+
+                            var chartDom = document.getElementById('data-chart');
+                            var myChart = echarts.init(chartDom);
+                            var option;
+
+                            option = {
+                                title: {
+                                    text: '各数据表数据量统计',
+                                    subtext: '单位：条',
+                                    x: 'center'
+                                },
+                                tooltip: {
+                                    trigger: 'axis'
+                                },
+                                xAxis: {
+                                    type: 'category',
+                                    data: data,
+                                    axisLabel: {
+                                        interval: 0,
+                                        rotate: 45
+                                    }
+                                },
+                                yAxis: {
+                                    type: 'value'
+                                },
+                                series: [{
+                                    data: amount,
+                                    type: 'bar',
+                                    barWidth: '40%',
+                                    label: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                }]
+                            };
+
+                            myChart.setOption(option);
+                        </script>
                     </div>
                 </div>
                 <div class="row mb100">
                     <div class="col-sm-3 col-xs-12">
                         <figure class="hover-item">
-                            <img src="assets/img/team/h1.jpg" class="img-responsive" alt="image">
+                            <img src="assets/img/team/wjx.jpg" class="img-responsive" alt="image">
                             <figcaption>
                                 <h3><strong>王健行 2111065</strong></h3>
                                 <h2></h2>
@@ -170,7 +213,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                     </div>
                     <div class="col-sm-3 col-xs-12">
                         <figure class="hover-item">
-                            <img src="assets/img/team/h2.jpg" class="img-responsive" alt="image">
+                            <img src="assets/img/team/yq.jpg" class="img-responsive" alt="image">
                             <figcaption>
                                 <h3><strong>杨淇 2112893</strong></h3>
                                 <h2></h2>
@@ -181,7 +224,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                     </div>
                     <div class="col-sm-3 col-xs-12">
                         <figure class="hover-item">
-                            <img src="assets/img/team/h3.jpg" class="img-responsive" alt="image">
+                            <img src="assets/img/team/lxy.jpg" class="img-responsive" alt="image">
                             <figcaption>
                                 <h3><strong>李星谊 2113601</strong></h3>
                                 <h2></h2>
@@ -192,7 +235,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                     </div>
                     <div class="col-sm-3 col-xs-12">
                         <figure class="hover-item">
-                            <img src="assets/img/team/h4.jpg" class="img-responsive" alt="image">
+                            <img src="assets/img/team/dyx.jpg" class="img-responsive" alt="image">
                             <figcaption>
                                 <h3><strong>杜怡兴 2112847</strong></h3>
                                 <h2></h2>
@@ -204,57 +247,68 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                 </div>
             </div>
         </div>
-    </section>
 
         
+    </section>
 
-    <!-- 添加了俄乌战争时间线-->
+
+
     <section id="timeline" class="timeline-outer">
         <div class="container" id="content">
             <div class="row">
                 <div class="col s12 m12 l12">
-                    <h2 class="section-heading"><strong>Timeline</strong> Of the Baosha</h2>
-                    <a href="<?php echo Url::to(['time-info/index']); ?>" class="btn btn-theme" target="_blank">learn more >></a>
+                    <h2 class="section-heading"><strong>Timeline</strong> Of the Fukushima incident</h2>
+                    <a href="https://www.thepaper.cn/newsDetail_forward_24349085">learn more >></a>
                     <ul class="timeline">
-                        <li class="event" data-date="2014/4">
-                            <h3>War in Donbass</h3>
-                            <p>
-                                In 2014, pro-Russian forces in Ukraine's Donbas region divided and held independence referendums modeled on Crimea, establishing the Donetsk and Lugans republics, respectively.Then in April 2014, the war in Donbass broke out.
-                            </p>
+                        <li class="event" data-date="2011">
+                            <h3>2011</h3>
+                            <p>March 11: A massive earthquake and tsunami led to the meltdown of three reactors at the Fukushima Daiichi plant.</p>
+                            <p>March 12: Following a hydrogen explosion at the plant, a 20km evacuation order was issued.</p>
+                            <p>April 4: TEPCO began releasing contaminated water into the Pacific due to storage capacity issues.</p>
+                            <p>April 12: The event was elevated to a category 7 nuclear accident.</p>
+                            <p>December 16: The reactors were declared in a stable state of "cold shutdown."</p>
                         </li>
-                        <li class="event" data-date="2015/2">
-                            <h3>Minsk Agreements</h3>
-                            <p>
-                                After the Minsk Agreement in February 2015 and the ceasefire settlement, the region was effectively freed from Ukrainian control, became autonomous, and moved politically closer to Russia.
-                            </p>
+                        <li class="event" data-date="2012">
+                            <h3>2012</h3>
+                            <p>July 23: An investigation concluded that the disaster was due to inadequate safety and crisis management.</p>
                         </li>
-                        <li class="event" data-date="2018/11">
-                            <h3>Kerch Strait conflict</h3>
-                            <p>On November 25, 2018, three warships, the Ukrainian naval vessels Berdyansk, Nikopol and Yanekab, crossed the Russian border and sailed towards the Kerch Strait. During the standoff, Russian ships opened fire on Ukrainian warships and seized three Ukrainian warships that had intruded into the area. In addition, a criminal case has been opened in accordance with Article 322, Part 3 of the Criminal Code of the Russian Federation (illegal crossing of the state border).
-                            </p>
+                        <li class="event" data-date="2013">
+                            <h3>2013</h3>
+                            <p>March 30: The Advanced Liquid Processing System (ALPS) began operating to treat contaminated water.</p>
+                            <p>July 22: TEPCO acknowledged ongoing radioactive water leaks into groundwater.</p>
                         </li>
-                        <li class="event" data-date="2021/2022">
-                            <h3>On the eve of the Baosha</h3>
-                            <p>2021.3 Ukraine passed a military service bill that allows the armed forces to directly recruit reservists to participate in military operations under exceptional circumstances without a presidential mobilization order.</p>
-                            <p>2021.4 Russia increased its troops to the Russian-Ukrainian border.</p>
-                            <p>2021.11 NATO held a meeting to discuss the possibility of a Russian invasion of Ukraine.</p>
-                            <p>2022.1.24 the evacuation of family members of U.S. diplomats began. Western countries then announced the withdrawal of diplomats and their families.</p>
-                            <p>2022.1.26 Russia, Ukraine, Germany and France held talks on the "Normandy format" in Paris.</p>
-                            <p>2022.2.14 The U.S. Embassy is closed. And Western media and officials said that Russia will invade Ukraine on February 16.</p>
-                            <p>2022.2.19 Russia conducts nuclear drills.</p>
-                            <p>2022.2.21 Putin called a meeting and livestreamed it and recognized the legitimacy of the Udon.</p>
-                            <p>2022.2.22 Russia announced that it recognizes the borders defined by the Donetsk and Lugans republics and will provide them with military assistance.</p>
-
+                        <li class="event" data-date="2014">
+                            <h3>2014</h3>
+                            <p>December 22: Spent nuclear fuel rods were removed from one reactor.</p>
                         </li>
-                        <li class="event" data-date="2022/2/24">
-                            <h3>The Russian-Ukrainian conflict officially breaks out</h3>
-                            <p>On the same day, Ukraine announces the closure of the national airspace and the severance of diplomatic relations with Russia, and President Zelensky states that Ukraine is in a state of war. On the same day, Russian troops shelled troops in eastern Ukraine, military command centres in other regions and airports.</p>
+                        <li class="event" data-date="2016">
+                            <h3>2016</h3>
+                            <p>March 31: An underground wall was introduced to reduce groundwater contamination.</p>
+                        </li>
+                        <li class="event" data-date="2018">
+                            <h3>2018</h3>
+                            <p>October 1: TEPCO admitted that water treated on-site still contained radioactive materials.</p>
+                        </li>
+                        <li class="event" data-date="2020">
+                            <h3>2020</h3>
+                            <p>February 10: A government panel recommended controlled water release into the sea.</p>
+                        </li>
+                        <li class="event" data-date="2021">
+                            <h3>2021</h3>
+                            <p>December 28: Japan outlined a plan for the water release, including safety and compensation measures.</p>
+                        </li>
+                        <li class="event" data-date="2023">
+                            <h3>2023</h3>
+                            <p>July 4: The IAEA approved Japan's water release plan after a two-year review.</p>
+                            <p>August 22: Prime Minister Kishida announced the imminent discharge.</p>
+                            <p>August 24: TEPCO began releasing the water.</p>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
+
 
     <section class="divider-wrapper-a section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">
         <div class="section-inner">
@@ -293,9 +347,9 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
         </div>
     </section>
 
-   <!--战争损失图 使用echarts-->
+    <!--战争损失图 使用echarts-->
     <section class="white echarts" id="losses">
-        <div class="section-inner echarts" >
+        <div class="section-inner echarts">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 wow fadeInDown">
@@ -318,10 +372,10 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                     company proportion
                 </div>
             </div>
-            <div id="grid-container" class="cbp-l-grid-work" >
-                <div class="cbp-item casualty" >
-                    <div class="row1" >
-                        <div class="echarts-item" >
+            <div id="grid-container" class="cbp-l-grid-work">
+                <div class="cbp-item casualty">
+                    <div class="row1">
+                        <div class="echarts-item">
                             <div id="echarts1" style="width:1000px ; height: 600px;"></div>
                         </div>
                     </div>
@@ -444,7 +498,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                             <li>
                                 <div class="row">
                                     <div class="col-xs-8">
-                                        <img src="assets/img/weapons/vj6h1.jpg" class="img-responsive" alt="">
+                                        <img src="assets/img/weapons/vj6wjx.jpg" class="img-responsive" alt="">
                                     </div>
                                     <div class="col-xs-4 item-caption">
                                         <p>
@@ -516,7 +570,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                 </div>
             </div>
         </div>
-    <!-- 俄乌战争7种轻武器 -->
+        <!-- 俄乌战争7种轻武器 -->
         <div class="section-inner">
             <div class="container">
                 <div class="row">
@@ -743,20 +797,19 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
             </div>
         </div>
     </section>
-    
+
     <section id="login" class="divider-wrapper-a section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg1.jpg" data-speed="0.7">
         <div class="section-inner">
             <div class="container">
                 <div class="row wow fadeInUp">
                     <div class="col-md-12 centered">
-                    <div class='btn btn-theme btn-white pull-left subscribe-submit' style="font-size:30px;">Baosha</div>
-                        <?php if(Yii::$app->session->getFlash('login')=='Already log in.'){
+                        <div class='btn btn-theme btn-white pull-left subscribe-submit' style="font-size:30px;">Baosha</div>
+                        <?php if (Yii::$app->session->getFlash('login') == 'Already log in.') {
                         ?>
-                        <button class='btn btn-theme btn-white pull-right subscribe-submit' type="submit"><?= Html::a('Log Out', ['site/logout']) ?></button>
-                        <?php } 
-                        else{?>
-                        <button class='btn btn-theme btn-white pull-right subscribe-submit' type="submit" style="margin-left: 50px;"><?= Html::a('Log In', ['site/login']) ?></button>
-                        <button class='btn btn-theme btn-white pull-right subscribe-submit' type="submit"><?= Html::a('Sign Up', ['site/signup']) ?></button>
+                            <button class='btn btn-theme btn-white pull-right subscribe-submit' type="submit"><?= Html::a('Log Out', ['site/logout']) ?></button>
+                        <?php } else { ?>
+                            <button class='btn btn-theme btn-white pull-right subscribe-submit' type="submit" style="margin-left: 50px;"><?= Html::a('Log In', ['site/login']) ?></button>
+                            <button class='btn btn-theme btn-white pull-right subscribe-submit' type="submit"><?= Html::a('Sign Up', ['site/signup']) ?></button>
                         <?php } ?>
                     </div>
                 </div>
@@ -803,7 +856,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
     </section>
 
     <section>
-        
+
     </section>
 
     <section id="social-profiles-fw">
@@ -841,7 +894,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                             <div>
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img src="assets/img/team/h1-s.jpg" class="widget-img" alt="image">
+                                        <img src="assets/img/team/wjx-s.jpg" class="widget-img" alt="image">
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">王健行</a></span>
@@ -850,7 +903,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                                 </div>
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img src="assets/img/team/h2-s.jpg" class="widget-img" alt="image">
+                                        <img src="assets/img/team/yq-s.jpg" class="widget-img" alt="image">
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">杨淇</a></span>
@@ -867,7 +920,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                             <div>
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img src="assets/img/team/h3-s.jpg" class="widget-img" alt="image">
+                                        <img src="assets/img/team/lxy-s.jpg" class="widget-img" alt="image">
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">李星谊</a></span>
@@ -876,7 +929,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                                 </div>
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img src="assets/img/team/h4-s.jpg" class="widget-img" alt="image">
+                                        <img src="assets/img/team/dyx-s.jpg" class="widget-img" alt="image">
                                     </div>
                                     <div class="media-body">
                                         <span class="media-heading"><a href="#">杜怡兴</a></span>
@@ -951,56 +1004,58 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
     </script>
 
     <script type="text/javascript">
-      // 基于准备好的dom，初始化echarts实例
-        var myChart1 = echarts.init(document.getElementById('echarts1'),null, {devicePixelRatio: 2.5});
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('echarts1'), null, {
+            devicePixelRatio: 2.5
+        });
         const days = [
-            '5', '2', '3', '4', '5', '6', '7','8', '9', '10', '11', '12',
-            '13', '14', '15', '16', '17', '18','19', '20', '21', '22', '23', '24',
+            '5', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
+            '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24',
             '25', '26', '27', '28', '29', '30', '31'
         ];
         // prettier-ignore
         const months = [
-            'March', 'April', 'May','June', 'July', 
+            'March', 'April', 'May', 'June', 'July',
             'August', 'September', 'October', 'November', 'December'
         ];
         // prettier-ignore
         const data1 = [
-        <?php 
-            $model=RCasualties::findBySql('select * from r_casualties where time<"2023-01-01" order by time asc;')->all();
-            $index=0;
-            $pre=0;
-            foreach($model as $item){
-                $month=intval(substr(strval(($item->time)),5,2))-3;
-                $day=intval(substr(strval(($item->time)),8,2))-1;
-                $increase=$item->num-$pre;
-                echo ('['.$month.','.$day.','.$increase.'],');  
-                $pre=$item->num;
-                if($month==1 && $month==3 && $month==6 && $month==8){
-                    if($day==29){
-                        echo '['.$month.',30,0],';
-
+                <?php
+                $model = RCasualties::findBySql('select * from r_casualties where time<"2023-01-01" order by time asc;')->all();
+                $index = 0;
+                $pre = 0;
+                foreach ($model as $item) {
+                    $month = intval(substr(strval(($item->time)), 5, 2)) - 3;
+                    $day = intval(substr(strval(($item->time)), 8, 2)) - 1;
+                    $increase = $item->num - $pre;
+                    echo ('[' . $month . ',' . $day . ',' . $increase . '],');
+                    $pre = $item->num;
+                    if ($month == 1 && $month == 3 && $month == 6 && $month == 8) {
+                        if ($day == 29) {
+                            echo '[' . $month . ',30,0],';
+                        }
                     }
                 }
-            }
-        ?>]
-        .map(function (item) {
-            return [item[1], item[0], item[2] || '-'];
-        });
+                ?>
+            ]
+            .map(function(item) {
+                return [item[1], item[0], item[2] || '-'];
+            });
         var option1 = {
             title: {
                 text: 'Daily Casualties',
                 left: '38%',
-                textStyle:{
-                    fontSize:30, //字体大小
-                    color:'#3d495d'
+                textStyle: {
+                    fontSize: 30, //字体大小
+                    color: '#3d495d'
                 }
             },
             tooltip: {
                 position: 'top'
             },
             dataZoom: [{
-                 type: 'inside'
-             }],
+                type: 'inside'
+            }],
             grid: {
                 height: '72%',
                 width: '85%',
@@ -1031,209 +1086,220 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                     color: ['#D9E9FF', "#0B69E3"]
                 }
             },
-            series: [
-                {
-                    name: 'Casualties Num',
-                    type: 'heatmap',
-                    bottom: '5%',
-                    data: data1,
-                    label: {
-                        show: true
-                    },
-                    emphasis: {
-                        itemStyle: {
-                            shadowBlur: 10,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
+            series: [{
+                name: 'Casualties Num',
+                type: 'heatmap',
+                bottom: '5%',
+                data: data1,
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
                     }
                 }
-            ]
+            }]
         };
         // 使用刚指定的配置项和数据显示图表。
         myChart1.setOption(option1);
-
-    </script>
-
-    <script type="text/javascript">
-      // 基于准备好的dom，初始化echarts实例
-      var myChart2 = echarts.init(document.getElementById('echarts2'),null, {devicePixelRatio: 2.5});
-      $.getJSON('assets/data/echarts2.json', function(data){
-        var result = [];
-        var result1 = [];
-        var name = [];
-        var name1 = [];
-        $.each(data, function(i,item){
-            var j=0;
-            var flag=0;
-            result1[i]={'name':item.armsname,'value':item.num};
-            name1[i]=item.armsname;
-
-            if(i==0){
-                result.push({'name':item.category,'value':item.num})
-                name[0]=item.category;
-            }
-            else{
-                while(j!=result.length) {
-                    if(result[j]['name']==item.category) {
-                        result[j]['value']+=item.num;
-                        flag=1;
-                        break;
-                    }
-                    j+=1;
-                }
-                if(flag==0){
-                    result.push({'name':item.category,'value':item.num});
-                    name[j]=item.category;
-                }
-            }
-        });
-        //alert(name.length);
-        var option2 = {
-            title: {
-                text: 'The Proportion Of Weapons In The War',
-                left: '20%',
-                textStyle:{
-                    fontSize:30, //字体大小
-                    color:'#241e14'
-                }
-            },
-            legend: [
-                {
-                    orient: 'vertical',
-                    left: '0%',
-                    top: '5%',
-                    textStyle: {
-                        fontSize: 14
-                    },
-                    data:name
-                },
-                {
-                    orient: 'vertical',
-                    left: '8%',
-                    top: '5%',
-                    textStyle: {
-                        fontSize: 12
-                    },
-                    data:name1
-                }
-            ],
-            color: [
-                '#988D80',
-                '#7F4620',
-                '#624F40',
-                '#223B3A',
-                '#532B23',
-                '#505B59',
-                '#343231',
-                '#714641',
-                '#7289ab',
-                '#5C4F43',
-                '#8E5118',
-                '#998A7E',
-                '#B6B6B6',
-                '#414141'
-            ],
-            series: [ 
-                {
-                    left: '20%',
-                    top: '8%',
-                    type: 'pie',
-                    radius: [0, '30%'],
-                    avoidLabelOverlap: false,
-                    selectedMode: 'single',
-                    label: {
-                        position: 'inner',
-                        fontSize: 14
-                    },
-                    labelLine: {
-                        show: false
-                    },
-                    emphasis: {
-                        label: {
-                        show: true,
-                        fontSize: '30',
-                        fontWeight: 'bold'
-                        }
-                    },
-                    data: result
-                },
-                {
-                    left: '20%',
-                    top: '8%',
-                    type: 'pie',
-                    radius: ['50%', '85%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                        formatter: '{b|{b}：}{c}  {per|{d}%}  ',
-                        backgroundColor: '#F6F8FC',
-                        borderColor: '#8C8D8E',
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        rich: {
-                            hr: {
-                                borderColor: '#8C8D8E',
-                                width: '100%',
-                                borderWidth: 1,
-                                height: 0
-                            },
-                            b: {
-                                color: '#4C5058',
-                                fontSize: 12,
-                                fontWeight: 'bold',
-                                lineHeight: 32
-                            },
-                            per: {
-                                color: '#fff',
-                                backgroundColor: '#4C5058',
-                                padding: [3, 4],
-                                fontSize: 12,
-                                borderRadius: 4
-                            }
-                        }
-                    },
-                    labelLine: {
-                        show: false
-                    },
-                    emphasis: {
-                        label: {
-                        show: true,
-                        fontSize: '30',
-                        fontWeight: 'bold'
-                        }
-                    },
-                    itemStyle: {
-                        borderRadius: 10,
-                        borderColor: '#fff',
-                        borderWidth: 2
-                    },
-                    data: result1
-                }
-            ]
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart2.setOption(option2);
-      });
     </script>
 
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart3 = echarts.init(document.getElementById('echarts3'),null, {devicePixelRatio: 2.5});
+        var myChart2 = echarts.init(document.getElementById('echarts2'), null, {
+            devicePixelRatio: 2.5
+        });
+        $.getJSON('assets/data/echarts2.json', function(data) {
+            var result = [];
+            var result1 = [];
+            var name = [];
+            var name1 = [];
+            $.each(data, function(i, item) {
+                var j = 0;
+                var flag = 0;
+                result1[i] = {
+                    'name': item.armsname,
+                    'value': item.num
+                };
+                name1[i] = item.armsname;
+
+                if (i == 0) {
+                    result.push({
+                        'name': item.category,
+                        'value': item.num
+                    })
+                    name[0] = item.category;
+                } else {
+                    while (j != result.length) {
+                        if (result[j]['name'] == item.category) {
+                            result[j]['value'] += item.num;
+                            flag = 1;
+                            break;
+                        }
+                        j += 1;
+                    }
+                    if (flag == 0) {
+                        result.push({
+                            'name': item.category,
+                            'value': item.num
+                        });
+                        name[j] = item.category;
+                    }
+                }
+            });
+            //alert(name.length);
+            var option2 = {
+                title: {
+                    text: 'The Proportion Of Weapons In The War',
+                    left: '20%',
+                    textStyle: {
+                        fontSize: 30, //字体大小
+                        color: '#241e14'
+                    }
+                },
+                legend: [{
+                        orient: 'vertical',
+                        left: '0%',
+                        top: '5%',
+                        textStyle: {
+                            fontSize: 14
+                        },
+                        data: name
+                    },
+                    {
+                        orient: 'vertical',
+                        left: '8%',
+                        top: '5%',
+                        textStyle: {
+                            fontSize: 12
+                        },
+                        data: name1
+                    }
+                ],
+                color: [
+                    '#988D80',
+                    '#7F4620',
+                    '#624F40',
+                    '#223B3A',
+                    '#532B23',
+                    '#505B59',
+                    '#343231',
+                    '#714641',
+                    '#7289ab',
+                    '#5C4F43',
+                    '#8E5118',
+                    '#998A7E',
+                    '#B6B6B6',
+                    '#414141'
+                ],
+                series: [{
+                        left: '20%',
+                        top: '8%',
+                        type: 'pie',
+                        radius: [0, '30%'],
+                        avoidLabelOverlap: false,
+                        selectedMode: 'single',
+                        label: {
+                            position: 'inner',
+                            fontSize: 14
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        data: result
+                    },
+                    {
+                        left: '20%',
+                        top: '8%',
+                        type: 'pie',
+                        radius: ['50%', '85%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            formatter: '{b|{b}：}{c}  {per|{d}%}  ',
+                            backgroundColor: '#F6F8FC',
+                            borderColor: '#8C8D8E',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            rich: {
+                                hr: {
+                                    borderColor: '#8C8D8E',
+                                    width: '100%',
+                                    borderWidth: 1,
+                                    height: 0
+                                },
+                                b: {
+                                    color: '#4C5058',
+                                    fontSize: 12,
+                                    fontWeight: 'bold',
+                                    lineHeight: 32
+                                },
+                                per: {
+                                    color: '#fff',
+                                    backgroundColor: '#4C5058',
+                                    padding: [3, 4],
+                                    fontSize: 12,
+                                    borderRadius: 4
+                                }
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        data: result1
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart2.setOption(option2);
+        });
+    </script>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart3 = echarts.init(document.getElementById('echarts3'), null, {
+            devicePixelRatio: 2.5
+        });
         // 指定图表的配置项和数据
         var result = [];
         var data = [];
-        $.getJSON('assets/data/echarts3.json', function(data1){
-            $.each(data1, function(i,item){
-                result[i]={'name':item.armsname,'value':item.num,'time':item.time};
+        $.getJSON('assets/data/echarts3.json', function(data1) {
+            $.each(data1, function(i, item) {
+                result[i] = {
+                    'name': item.armsname,
+                    'value': item.num,
+                    'time': item.time
+                };
             });
             var category_num = 0;
-            while(result[category_num]['time']==result[0]['time'])
+            while (result[category_num]['time'] == result[0]['time'])
                 category_num += 1;
             var index = 0;
-            for(;index<category_num;index++){
-                data[index]=[result[index]['value'],result[index]['name']];
+            for (; index < category_num; index++) {
+                data[index] = [result[index]['value'], result[index]['name']];
             }
-            var time = result[0]['time'].replace('-','.');
-            time = time.substr(0,7);
+            var time = result[0]['time'].replace('-', '.');
+            time = time.substr(0, 7);
             const weaponColors = {
                 '坦克': '#6B2B1F',
                 '飞机': '#414141',
@@ -1250,9 +1316,9 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                 title: {
                     text: 'Number Of Weapon Losses',
                     left: '30%',
-                    textStyle:{
-                        fontSize:30, //字体大小
-                        color:'#221414'
+                    textStyle: {
+                        fontSize: 30, //字体大小
+                        color: '#221414'
                     }
                 },
                 xAxis: {
@@ -1277,21 +1343,20 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                         }
                     }
                 },
-                series: [
-                {
+                series: [{
                     realtimeSort: true,
                     top: '10%',
                     type: 'bar',
                     data: data,
                     seriesLayoutBy: 'column',
                     itemStyle: {
-                        color: function (param) {
-                            return weaponColors[param.value[1]]||'#5470c6';
+                        color: function(param) {
+                            return weaponColors[param.value[1]] || '#5470c6';
                         }
                     },
-                    encode: { 
-                        x: 0, 
-                        y: 3, 
+                    encode: {
+                        x: 0,
+                        y: 3,
                     },
                     label: {
                         show: true,
@@ -1300,47 +1365,47 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                         valueAnimation: true,
                         fontFamily: 'monospace'
                     }
-                }
-                ],
+                }],
                 animationDuration: 3000,
                 animationDurationUpdate: 3000,
                 animationEasing: 'linear',
                 animationEasingUpdate: 'linear',
                 graphic: {
-                  elements: [
-                      {
-                          type: 'text',
-                          right: 0,
-                          bottom: 60,
-                          style: {
-                              text: time.toString(),
-                              font: 'bolder 80px monospace',
-                              fill: 'rgba(100, 100, 100, 0.25)'
-                          },
-                          z: 100
-                      }
-                  ]
-              }
-            };
-            function update() {
-                if(start==1){
-                var data = option3.series[0].data;
-                if(index==result.length)
-                    return;
-                for (var i = 0; i < category_num; ++i) {
-                    //data[i]['name']=result[index+i]['name'];
-                    //data[i]['value']=result[index+i]['value'];
-                    data[i]=[result[index+i]['value'],result[index+i]['name']];
+                    elements: [{
+                        type: 'text',
+                        right: 0,
+                        bottom: 60,
+                        style: {
+                            text: time.toString(),
+                            font: 'bolder 80px monospace',
+                            fill: 'rgba(100, 100, 100, 0.25)'
+                        },
+                        z: 100
+                    }]
                 }
-                time = result[index]['time'].replace('-','.');
-                time = time.substr(0,7);
-                index += category_num;
-                option3.series[0].data=data;
-                option3.graphic.elements[0].style.text = time;
-                myChart3.setOption(option3);
+            };
+
+            function update() {
+                if (start == 1) {
+                    var data = option3.series[0].data;
+                    if (index == result.length)
+                        return;
+                    for (var i = 0; i < category_num; ++i) {
+                        //data[i]['name']=result[index+i]['name'];
+                        //data[i]['value']=result[index+i]['value'];
+                        data[i] = [result[index + i]['value'], result[index + i]['name']];
+                    }
+                    time = result[index]['time'].replace('-', '.');
+                    time = time.substr(0, 7);
+                    index += category_num;
+                    option3.series[0].data = data;
+                    option3.graphic.elements[0].style.text = time;
+                    myChart3.setOption(option3);
+                }
             }
-            }
-            setInterval(function() { update();}, 100);
+            setInterval(function() {
+                update();
+            }, 100);
             // 使用刚指定的配置项和数据显示图表。
             myChart3.setOption(option3);
         });
@@ -1352,59 +1417,57 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
             devicePixelRatio: 2.5
         });
         // 指定图表的配置项和数据
-            // prettier-ignore
+        // prettier-ignore
         var data4 = [
             <?php
             $model4 = CountryNum::findBySql('select * from country_num;')->all();
             $index = 0;
             $pre = 0;
             foreach ($model4 as $item) {
-                echo ('["'. $item->country_name .'", '. $item->num .'],');
+                echo ('["' . $item->country_name . '", ' . $item->num . '],');
             }
             ?>
-            ]
-            
-        var option4 = {
-                title: {
-                    text: "Nationality Of Weapon Companies",
-                    left: '18%',
-                    textStyle:{
-                        fontSize:30, //字体大小
-                        color:'#221414'
-                    }
-                },
-                xAxis: {
-                    type: 'category',
-                    name:'country',
-                    nameTextStyle:{//x坐标轴名称的字体样式
-                        color:'#221414', 
-                        fontSize:16
-                    }
-                },
-                dataZoom: [{
-                    type: 'inside'
-                }],
-                yAxis: {
-                    type: 'value',
-                    name:'Company num',
-                    nameTextStyle:{
-                        color:'#221414', 
-                        fontSize:16
-                    }
-                },
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
-                    {
-                        offset: 0,
-                        color: '#988D80'
-                    },
-                    {
-                        offset: 1,
-                        color: '#7F4620'
-                    }
-                ]),
+        ]
 
-            series: [
+        var option4 = {
+            title: {
+                text: "Nationality Of Weapon Companies",
+                left: '18%',
+                textStyle: {
+                    fontSize: 30, //字体大小
+                    color: '#221414'
+                }
+            },
+            xAxis: {
+                type: 'category',
+                name: 'country',
+                nameTextStyle: { //x坐标轴名称的字体样式
+                    color: '#221414',
+                    fontSize: 16
+                }
+            },
+            dataZoom: [{
+                type: 'inside'
+            }],
+            yAxis: {
+                type: 'value',
+                name: 'Company num',
+                nameTextStyle: {
+                    color: '#221414',
+                    fontSize: 16
+                }
+            },
+            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                    offset: 0,
+                    color: '#988D80'
+                },
                 {
+                    offset: 1,
+                    color: '#7F4620'
+                }
+            ]),
+
+            series: [{
                 type: 'bar',
                 showBackground: true,
                 backgroundStyle: {
@@ -1424,8 +1487,7 @@ if(Yii::$app->session->getFlash('login')=='Have not logged in.') {
                         fontWeight: 'bold'
                     }
                 }
-                }
-            ]
+            }]
         };
         myChart4.setOption(option4);
     </script>
