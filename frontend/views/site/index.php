@@ -242,7 +242,40 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
         </div>
     </section>
 
-    <!-- 添加了俄乌战争战线图（直接调用其他网站）-->
+
+    
+    <section class="divider-wrapper-a section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">
+        <div class="section-inner">
+            <div class="container">
+                <div class="col-lg-12 wow fadeInDown">
+                    <h2 class="section-heading">
+                        View All
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row" style="margin: 15%;">
+        <?php foreach ($MyNews as $newsItem) : ?>
+            <div class="col-md-4">
+                <a href="<?= $newsItem->link ?>" target="_blank">
+                    <div class="card mb-4" style="border-radius: 10px; margin: 10px;">
+                        <img src="<?= $newsItem->imgLink ?>" class="card-img-top" alt="<?= $newsItem->title ?>" style="width: 200px; height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $newsItem->title ?></h5>
+                            <p class="card-text"><?= substr($newsItem->content, 0, 150) ?><?= strlen($newsItem->content) > 150 ? '...' : '' ?></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+
+
+
+
     <section id="map" class="white section-wrapper">
         <iframe src="https://jciv.iidj.net/map/" name="ifd" height="700px" width="100%" scrolling="no" frameborder="0"></iframe>
     </section>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  Team: BaoSha
  *  Coding by 李星谊 2113601  1/16
@@ -25,6 +26,7 @@ use common\models\User;
 use app\models\Migration;
 use app\models\Japannuclearnews;
 use app\models\radiationlevels;
+use app\models\Mynews;
 
 /**
  * Site controller
@@ -86,10 +88,12 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $model = new Suggestion();
-        $model->id=Suggestion::find()->count();
+        $model->id = Suggestion::find()->count();
         $JapanNuclearNews = JapanNuclearNews::find()->all();
         $radiationData = radiationlevels::find()->all();
-        
+        // 从MyNews表中选择第十个到第二十个数据
+        $MyNews = MyNews::find()->offset(10)->limit(9)->all();
+
 
         if (!Yii::$app->user->isGuest) {
             Yii::$app->session->setFlash('login', 'Already log in.');
@@ -97,12 +101,10 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('success_save', 'Thank you for your suggestion.');
                 return $this->goHome();
             }
-        }
-        else {
+        } else {
             if ($model->load(Yii::$app->request->post())) {
                 Yii::$app->session->setFlash('login', 'Have not logged in.');
-            }
-            else {
+            } else {
                 Yii::$app->session->setFlash('login', ' ');
             }
         }
@@ -111,7 +113,9 @@ class SiteController extends Controller
         $model->email = '';
         $model->suggestion = '';
         return $this->renderPartial('index', [
-            'model' => $model,'radiationData'=>$radiationData,'JapanNuclearNews'=>$JapanNuclearNews
+            'model' => $model, 'radiationData' => $radiationData,
+            'JapanNuclearNews' => $JapanNuclearNews,
+            'MyNews' => $MyNews,
         ]);
     }
 
