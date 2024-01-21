@@ -99,9 +99,10 @@ class SiteController extends Controller
     {
         // return $this->render('index');
         $firstUser = User::find()->orderBy('id')->one(); // 获取第一个用户
+        $radiationData = radiationlevels::find()->all();
 
         // 渲染视图并传递数据
-        return $this->render('index', ['firstUser' => $firstUser]);
+        return $this->render('index', ['firstUser' => $firstUser,'radiationData'=>$radiationData]);
     }
 
     /**
