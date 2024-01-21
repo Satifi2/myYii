@@ -841,8 +841,19 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
 
 
 
+    <section class="divider-wrapper-a section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">
+        <div class="section-inner">
+            <div class="container">
+                <div class="col-lg-12 wow fadeInDown">
+                    <h2 class="section-heading">
+                        View All
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <section id="about-us" style="margin: 20%;">
+    <section id="about-us" style="margin: 10%;">
         <table class="table table-bordered table-rounded">
             <thead>
                 <tr>
@@ -890,7 +901,37 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
             .list-group-item {
                 border: none;
             }
+
+            .card-image {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                /* 保持图片比例并填充容器 */
+            }
         </style>
+
+        <div class="row">
+            <?php foreach ($JapanNuclearNews as $newsItem) : ?>
+                <div class="col-md-4">
+                    <a href="<?= $newsItem->url ?>" target="_blank"> <!-- 使用target="_blank"在新标签页中打开链接 -->
+                        <div class="card mb-4">
+                            <img src="<?= $newsItem->url ?>" class="card-img-top card-image" alt="News Image">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $newsItem->headline ?></h5>
+                                <p class="card-text"><?= $newsItem->news_content ?></p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Event Date: <?= $newsItem->event_date ?></li>
+                                <li class="list-group-item">Location: <?= $newsItem->location ?></li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+
+
 
     </section>
 
