@@ -247,6 +247,232 @@ $this->title = 'My Yii Application';
                     <?php endforeach; ?>
                 </tbody>
             </table>
+
+
+            <!-- 引入ECharts库的JavaScript文件，确保路径正确 -->
+            <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+
+            <!-- 创建一个具有指定ID的容器用于显示热力图 -->
+            <div id="heatmapChart" style="width: 800px; height: 400px;"></div>
+
+            <script>
+                // 获取包含数据的 JavaScript 对象
+                var data = [{
+                        Region: 'Tokyo, Japan',
+                        'Radiation Dose Rate': 0.12
+                    },
+                    {
+                        Region: 'Chernobyl, Ukraine',
+                        'Radiation Dose Rate': 0.78
+                    },
+                    {
+                        Region: 'Los Angeles, USA',
+                        'Radiation Dose Rate': 0.10
+                    },
+                    {
+                        Region: 'Sellafield, UK',
+                        'Radiation Dose Rate': 0.25
+                    },
+                    {
+                        Region: 'Savannah River, USA',
+                        'Radiation Dose Rate': 0.18
+                    },
+                    {
+                        Region: 'Seversk, Russia',
+                        'Radiation Dose Rate': 0.15
+                    },
+                    {
+                        Region: 'Fukushima, Japan',
+                        'Radiation Dose Rate': 0.30
+                    },
+                    {
+                        Region: 'Paris, France',
+                        'Radiation Dose Rate': 0.08
+                    },
+                    {
+                        Region: 'Beijing, China',
+                        'Radiation Dose Rate': 0.09
+                    },
+                    {
+                        Region: 'Sydney, Australia',
+                        'Radiation Dose Rate': 0.11
+                    }
+                ];
+
+                // 获取图表容器
+                var chartContainer = document.getElementById('heatmapChart');
+
+                // 创建 ECharts 实例
+                var myChart = echarts.init(chartContainer);
+
+                // 提取不同地区的数据
+                var regions = data.map(item => item.Region);
+                var doseRates = data.map(item => item['Radiation Dose Rate']);
+
+                // 配置热力图选项
+                var option = {
+                    title: {
+                        text: 'Heatmap - Radiation Dose Rate by Region',
+                        left: 'center',
+                        textStyle: {
+                            fontSize: 16
+                        }
+                    },
+                    tooltip: {
+                        position: 'top'
+                    },
+                    grid: {
+                        height: '50%',
+                        top: '30%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: regions,
+                        splitArea: {
+                            show: true
+                        },
+                        axisLabel: {
+                            rotate: 45, // 45度角度标签以避免重叠
+                            interval: 0 // 强制显示所有标签
+                        }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: ['Radiation Dose Rate'],
+                        splitArea: {
+                            show: true
+                        }
+                    },
+                    visualMap: {
+                        min: Math.min(...doseRates),
+                        max: Math.max(...doseRates),
+                        calculable: true,
+                        orient: 'horizontal',
+                        left: 'center',
+                        bottom: '15%'
+                    },
+                    series: [{
+                        name: 'Radiation Dose Rate',
+                        type: 'heatmap',
+                        data: data.map(item => [item.Region, 'Radiation Dose Rate', item['Radiation Dose Rate']]),
+                        label: {
+                            show: true
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }]
+                };
+
+                // 使用配置项设置热力图
+                myChart.setOption(option);
+            </script>
+
+            <!-- 引入ECharts库的JavaScript文件，确保路径正确 -->
+            <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+
+            <!-- 创建一个具有指定ID的容器用于显示雷达图 -->
+            <div id="radarChart" style="width: 800px; height: 400px;"></div>
+
+            <script>
+                // 获取包含数据的 JavaScript 对象
+                var data = [{
+                        Region: 'Tokyo, Japan',
+                        'Radiation Dose Rate': 0.12
+                    },
+                    {
+                        Region: 'Chernobyl, Ukraine',
+                        'Radiation Dose Rate': 0.78
+                    },
+                    {
+                        Region: 'Los Angeles, USA',
+                        'Radiation Dose Rate': 0.10
+                    },
+                    {
+                        Region: 'Sellafield, UK',
+                        'Radiation Dose Rate': 0.25
+                    },
+                    {
+                        Region: 'Savannah River, USA',
+                        'Radiation Dose Rate': 0.18
+                    },
+                    {
+                        Region: 'Seversk, Russia',
+                        'Radiation Dose Rate': 0.15
+                    },
+                    {
+                        Region: 'Fukushima, Japan',
+                        'Radiation Dose Rate': 0.30
+                    },
+                    {
+                        Region: 'Paris, France',
+                        'Radiation Dose Rate': 0.08
+                    },
+                    {
+                        Region: 'Beijing, China',
+                        'Radiation Dose Rate': 0.09
+                    },
+                    {
+                        Region: 'Sydney, Australia',
+                        'Radiation Dose Rate': 0.11
+                    }
+                ];
+
+                // 获取图表容器
+                var chartContainer = document.getElementById('radarChart');
+
+                // 创建 ECharts 实例
+                var myChart = echarts.init(chartContainer);
+
+                // 提取不同地区的数据
+                var regions = data.map(item => item.Region);
+                var doseRates = data.map(item => item['Radiation Dose Rate']);
+
+                // 配置雷达图选项
+                var option = {
+                    title: {
+                        text: 'Radar Chart - Radiation Dose Rate by Region',
+                        left: 'center',
+                        textStyle: {
+                            fontSize: 16
+                        }
+                    },
+                    tooltip: {},
+                    radar: {
+                        indicator: regions.map(region => ({
+                            name: region,
+                            max: Math.max(...doseRates)
+                        })),
+                        radius: '65%',
+                        center: ['50%', '50%'],
+                    },
+                    series: [{
+                        type: 'radar',
+                        data: [{
+                            value: doseRates,
+                            name: 'Radiation Dose Rate',
+                            areaStyle: {
+                                color: 'rgba(255, 0, 0, 0.5)' // 雷达图区域填充颜色
+                            },
+                            lineStyle: {
+                                color: 'red' // 雷达图边框线颜色
+                            },
+                        }, ],
+                    }],
+                };
+
+                // 使用配置项设置雷达图
+                myChart.setOption(option);
+            </script>
+
+
+
+            <iframe src="https://jciv.iidj.net/map/" name="ifd" height="700px" width="100%" scrolling="no" frameborder="0"></iframe>
+
             <div class="container">
 
                 <div class="row no-gutters">
@@ -287,6 +513,9 @@ $this->title = 'My Yii Application';
 
             </div>
         </section><!-- End Counts Section -->
+
+
+
 
         <!-- ======= Cta Section ======= -->
         <section id="cta" class="cta">
