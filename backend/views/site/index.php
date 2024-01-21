@@ -315,6 +315,18 @@ use yii\bootstrap5\Html;
 							<span class="title">用户管理</span>
 						</a>
 					</li>
+					<li>
+						<a href="index.php?r=consequences">
+							<i class="linecons-star"></i>
+							<span class="title">数据库:consequences</span>
+						</a>
+					</li>
+					<li>
+						<a href="index.php?r=countriesreactions">
+							<i class="linecons-star"></i>
+							<span class="title">数据库:countriesreactions</span>
+						</a>
+					</li>
 				</ul>
 
 			</div>
