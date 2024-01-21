@@ -380,7 +380,7 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
             </div>
             <div id="filters-container" class="cbp-l-filters-work container">
                 <div data-filter=".casualty" class="btn btn-theme cbp-filter-item-active cbp-filter-item c">
-                    reaction levels<span></span>
+                    <span></span>
                 </div>
                 <div data-filter=".weapons-ratio" class="btn btn-theme cbp-filter-item r">
                     weapons ratio
