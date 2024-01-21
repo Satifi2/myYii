@@ -21,6 +21,10 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\Suggestion;
+use common\models\User;
+use app\models\Migration;
+use app\models\Japannuclearnews;
+use app\models\radiationlevels;
 
 /**
  * Site controller
@@ -83,6 +87,9 @@ class SiteController extends Controller
     {
         $model = new Suggestion();
         $model->id=Suggestion::find()->count();
+        $newsData = JapanNuclearNews::find()->all();
+        $radiationData = radiationlevels::find()->all();
+        
 
         if (!Yii::$app->user->isGuest) {
             Yii::$app->session->setFlash('login', 'Already log in.');
@@ -104,7 +111,7 @@ class SiteController extends Controller
         $model->email = '';
         $model->suggestion = '';
         return $this->renderPartial('index', [
-            'model' => $model,
+            'model' => $model,'radiationData'=>$radiationData
         ]);
     }
 

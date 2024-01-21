@@ -248,7 +248,7 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
             </div>
         </div>
 
-        
+
     </section>
 
 
@@ -349,18 +349,39 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
 
     <!--战争损失图 使用echarts-->
     <section class="white echarts" id="losses">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>Radiation Dose Rate</th>
+                    <th>Radiation Source</th>
+                    <th>Monitoring Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($radiationData as $radiationItem) : ?>
+                    <tr>
+                        <td><?= Html::encode($radiationItem->region) ?></td>
+                        <td><?= Html::encode($radiationItem->radiation_dose_rate) ?></td>
+                        <td><?= Html::encode($radiationItem->radiation_source) ?></td>
+                        <td><?= Html::encode($radiationItem->monitoring_time) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
         <div class="section-inner echarts">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 wow fadeInDown">
-                        <h2 class="section-heading">War <strong>Losses</strong> </h2>
-                        <h3 class="section-subheading text-muted">Loss of personnel and weapons caused by war.</h3>
+                        <h2 class="section-heading"> <strong></strong> </h2>
+                        <h3 class="section-subheading text-muted"></h3>
                     </div>
                 </div>
             </div>
             <div id="filters-container" class="cbp-l-filters-work container">
                 <div data-filter=".casualty" class="btn btn-theme cbp-filter-item-active cbp-filter-item c">
-                    casualty<span></span>
+                    reaction levels<span></span>
                 </div>
                 <div data-filter=".weapons-ratio" class="btn btn-theme cbp-filter-item r">
                     weapons ratio
