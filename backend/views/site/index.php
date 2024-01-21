@@ -327,8 +327,50 @@ use yii\bootstrap5\Html;
 							<span class="title">数据库:countriesreactions</span>
 						</a>
 					</li>
-				</ul>
+					<li>
+						<a href="index.php?r=environmentalimpact">
+							<i class="linecons-star"></i>
+							<span class="title">数据库:environmentalimpact</span>
+						</a>
+					</li>
+					<li>
+						<a href="index.php?r=healtheffects">
+							<i class="linecons-star"></i>
+							<span class="title">数据库:healtheffects</span>
+						</a>
+					</li>
+					<li>
+						<a href="index.php?r=incidents">
+							<i class="linecons-star"></i>
+							<span class="title">数据库:incidents</span>
+						</a>
+					</li>
+					<li>
+						<a href="index.php?r=japannuclearnews">
+							<i class="linecons-star"></i>
+							<span class="title">数据库:japannuclearnews</span>
+						</a>
+					</li>
 
+					<li>
+						<a href="index.php?r=monitoringdata">
+							<i class="linecons-star"></i>
+							<span class="title">数据库:monitoringdata</span>
+						</a>
+					</li>
+					<li>
+						<a href="index.php?r=nuclearfacilities">
+							<i class="linecons-star"></i>
+							<span class="title">数据库:nuclearfacilities</span>
+						</a>
+					</li>
+					<li>
+						<a href="index.php?r=regulations">
+							<i class="linecons-star"></i>
+							<span class="title">数据库:regulations</span>
+						</a>
+					</li>
+				</ul>
 			</div>
 
 		</div>
