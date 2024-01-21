@@ -14,11 +14,6 @@
 
 $this->title = 'R-U War intergrade';
 
-use frontend\models\CountryNum;
-use frontend\models\RuNews;
-use frontend\models\Weapons;
-use frontend\models\RCasualties;
-use frontend\models\Suggestion;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
@@ -95,7 +90,6 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
         </div>
     </div>
 
-
     <div id="main-navigation" class="navbar navbar-inverse navbar-fixed-top smoothtransition fadeInDown sb-slide" data-wow-delay="1s" role="navigation">
         <div class="container smoothtransition">
             <div class="navbar-header">
@@ -111,10 +105,8 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="page-scroll" href="#about-us">About</a></li>
                     <li><a class="page-scroll" href="#timeline">Timeline</a></li>
-                    <li><a class="page-scroll" href="#losses">Losses</a></li>
                     <li><a class="page-scroll" href="#news">News</a></li>
-                    <li><a class="page-scroll" href="#weapons">Weapons</a></li>
-                    <li><a class="page-scroll" href="#map">Front Map</a></li>
+                    <li><a class="page-scroll" href="#map">Map</a></li>
                     <li><a class="page-scroll" href="#contact">Contact</a></li>
                     <li><a id="searchtrigger" href="#"><i class="fa fa-search"></i></a></li>
                 </ul>
@@ -247,11 +239,12 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
                 </div>
             </div>
         </div>
-
-
     </section>
 
-
+    <!-- 添加了俄乌战争战线图（直接调用其他网站）-->
+    <section id="map" class="white section-wrapper">
+        <iframe src="https://jciv.iidj.net/map/" name="ifd" height="700px" width="100%" scrolling="no" frameborder="0"></iframe>
+    </section>
 
     <section id="timeline" class="timeline-outer">
         <div class="container" id="content">
@@ -317,28 +310,28 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
                     <div class="col-md-3 col-xs-12">
                         <div class="text-center">
                             <span class="stat-icon"><i class="pe-7s-timer fa-4x"></i></span>
-                            <h2><span class="countup">10248</span></h2>
+                            <h2><span class="countup">11</span></h2>
                             <h6>Hours Saved</h6>
                         </div>
                     </div>
                     <div class="col-md-3 col-xs-12">
                         <div class="text-center">
                             <span class="stat-icon"><i class="pe-7s-cloud-upload fa-4x"></i></span>
-                            <h2><span class="countup">2035945</span></h2>
+                            <h2><span class="countup">43</span></h2>
                             <h6>Files Uploaded</h6>
                         </div>
                     </div>
                     <div class="col-md-3 col-xs-12">
                         <div class="text-center">
                             <span class="stat-icon"><i class="pe-7s-tools fa-4x"></i></span>
-                            <h2><span class="countup">24</span></h2>
+                            <h2><span class="countup">56</span></h2>
                             <h6>Hours Of Support</h6>
                         </div>
                     </div>
                     <div class="col-md-3 col-xs-12">
                         <div class="text-center">
                             <span class="stat-icon"><i class="pe-7s-like fa-4x"></i></span>
-                            <h2><span class="countup">99999999</span></h2>
+                            <h2><span class="countup">9</span></h2>
                             <h6>Social Shares</h6>
                         </div>
                     </div>
@@ -347,9 +340,12 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
         </div>
     </section>
 
-    <!--战争损失图 使用echarts-->
-    <section class="white echarts" id="losses">
-        <table class="table table-bordered">
+    <section id="about-us" class="white section-wrapper">
+    <div style="text-align: center;">
+            <h2 style="font-weight: bold;">radiation levels</h2>
+            <p style="color: gray; font-size: 15px;">此数据来自于数据库表 "radiation levels"</p>
+        </div>
+        <table class="table table-bordered" style="width: 70%; margin: 0 auto; margin-top: 20px; margin-bottom: 0px;">
             <thead>
                 <tr>
                     <th>Region</th>
@@ -369,6 +365,9 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </section>
+
+    <section class="white echarts" id="losses">
 
         <div class="section-inner echarts">
             <div class="container">
@@ -425,400 +424,7 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
             </div>
         </div>
     </section>
-    <!--     -->
-
-    <section id="news" class="divider-wrapper-a section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">
-        <div class="section-inner nopaddingbottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 wow fadeInDown">
-                        <h2 class="section-heading"><strong>Nuclear Pollution News</strong> Posts</h2>
-                        <h3 class="section-subheading text-muted">Click these images to reach latest news.</h3>
-                    </div>
-                </div>
-            </div>
-            <ul class="owl-carousel-paged owl-controls-inside list-unstyled wow fadeInUp" data-items="3" data-items-tablet="[768,2]" data-items-mobile="[479,1]">
-                <?php
-                $news_model = RuNews::findBySql('select * from ru_news')->all();
-                $i = 0;
-                foreach ($news_model as $item) {
-                    echo ('<li class="portfolio-item">');
-                    echo ('<figure class="hover-item">');
-                    echo (sprintf(
-                        '<img src="assets/img/news/%s/%s-9.jpg" class="img-responsive" alt="image">',
-                        $item->img_path,
-                        $item->img_path
-                    ));
-                    echo (sprintf(
-                        '<figcaption>
-                                        <h2>%s</h2>
-                                        <p class="icon-links">
-                                            <a href="https://www.nytimes.com/%s"><span class="fa fa-link"></span></a>
-                                        </p>
-                                    </figcaption>
-                                </figure>',
-                        $item->title,
-                        $item->url
-                    ));
-                    if (++$i >= 5) break;
-                }
-                ?>
-            </ul>
-        </div>
-    </section>
-
-    <section class="divider-wrapper-a section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">
-        <div class="section-inner">
-            <div class="container">
-                <div class="col-lg-12 wow fadeInDown">
-                    <h2 class="section-heading">
-                        <a href="index.php?r=ru-news" class="btn btn-theme">View All</a>
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 添加了俄乌战争战线图（直接调用其他网站）-->
-    <section id="map" class="white section-wrapper">
-        <div class="section-inner nopaddingbottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 wow fadeInDown">
-                        <h2 class="section-heading"><strong>Russia-ukraine War</strong> Front Map</h2>
-                        <h3 class="section-subheading text-muted">Map of the Baosha front.</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="ua-war-data">
-        <div class="nopadding">
-            <div>
-                <iframe src="https://www.uawardata.com/" name="ifd" height="100%" width="100%" scrolling="no" frameborder="0">
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- 武器展示 -->
-    <section id="weapons" class="white section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg-bw.jpg" data-speed="0.7">
-        <div class="section-inner nopaddingbottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 wow fadeInDown">
-                        <h2 class="section-heading"><strong>Weapons</strong> display </h2>
-                        <h3 class="section-subheading text-muted">Russian-Ukrainian weapons and equipment and other light weapons.</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <ul class="owl-carousel-paged testimonial-owl wow fadeInUp list-unstyled" data-items="1" data-items-tablet="[768,1]" data-items-mobile="[479,1]">
-
-                            <li>
-                                <div class="row">
-                                    <div class="col-xs-8">
-                                        <img src="assets/img/weapons/vj6wjx.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="col-xs-4 item-caption">
-                                        <p>
-                                            <?php
-                                            $model1 = Weapons::findBySql('SELECT * from weapons where name ="Kord-5.45" LIMIT 1')->all();
-                                            foreach ($model1 as $item)
-                                                echo ($item->content);
-                                            ?>
-                                        </p>
-                                        <span><strong>The Kord-5.45 (КОРД-5.45) light machine gun</strong></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-xs-8">
-                                        <img src="assets/img/weapons/scrshot06.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="col-xs-4 item-caption">
-                                        <p>
-                                            <?php
-                                            $model1 = Weapons::findBySql('SELECT * from weapons where name ="RPL-20" LIMIT 1')->all();
-                                            foreach ($model1 as $item)
-                                                echo ($item->content);
-                                            ?>
-                                        </p>
-                                        <span><strong>RPL-20 light machine gun (РПЛ-20)</strong></span>
-                                    </div>
-                                </div>
-                            </li>
-
-
-                            <li>
-                                <div class="row">
-                                    <div class="col-xs-8">
-                                        <img src="assets/img/weapons/1845482.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="col-xs-4 item-caption">
-                                        <p>
-                                            <?php
-                                            $model1 = Weapons::findBySql('SELECT * from weapons where name ="MSMC" LIMIT 1')->all();
-                                            foreach ($model1 as $item)
-                                                echo ($item->content);
-                                            ?>
-                                        </p>
-                                        <span><strong>MSMC is known as the "Modern Submachine Carbine"</strong></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-xs-8">
-                                        <img src="assets/img/weapons/pu-1.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="col-xs-4 item-caption">
-                                        <p>
-                                            <?php
-                                            $model1 = Weapons::findBySql('SELECT * from weapons where name ="PU" LIMIT 1')->all();
-                                            foreach ($model1 as $item)
-                                                echo ($item->content);
-                                            ?>
-                                        </p>
-                                        <span><strong>PU "Uniformly Fed Machine Gun" (Пулемет с унифицированной подачей)</strong></span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 俄乌战争7种轻武器 -->
-        <div class="section-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 wow fadeInDown">
-                        <h2 class="section-heading">Different types of <strong>light weapons</strong></h2>
-                        <h3 class="section-subheading text-muted">Seven different types of light weapons from Russia and Ukraine.</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <ul class="owl-carousel-paged testimonial-owl wow fadeInUp list-unstyled" data-items="1" data-items-tablet="[768,1]" data-items-mobile="[479,1]">
-                        <li>
-                            <div class="container">
-                                <div class="row wow fadeInUp">
-                                    <div class="col-md-12 centered">
-                                        <div>
-                                            <h2>Machine guns</h2>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <figure class="hover-item">
-                                                <img src="assets/img/weapons/weapon2.jpg" class="img-responsive" alt="image">
-                                                <figcaption>
-                                                    <h2>
-                                                        <?php
-                                                        $model2 = Weapons::findBySql('select * from weapons where kind ="2" LIMIT 1')->all();
-                                                        foreach ($model2 as $item)
-                                                            echo ($item->name);
-                                                        ?>
-                                                    </h2>
-                                                    <p class="icon-links">
-                                                        <a href="assets/img/weapons/weapon2.jpg" class="swipebox"><span class="fa fa fa-search-plus"></span></a>
-                                                        <a href="weapons/weapon2.php" class="cbp-singlePage"><span class="fa fa-link"></span></a>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="container">
-                                <div class="row wow fadeInUp">
-                                    <div class="col-md-12 centered">
-                                        <div>
-                                            <h2>Shotguns</h2>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <figure class="hover-item">
-                                                <img src="assets/img/weapons/weapon6.jpg" class="img-responsive" alt="image">
-                                                <figcaption>
-                                                    <h2>
-                                                        <?php
-                                                        $model2 = Weapons::findBySql('select * from weapons where kind ="6" LIMIT 1')->all();
-                                                        foreach ($model2 as $item)
-                                                            echo ($item->name);
-                                                        ?>
-                                                    </h2>
-                                                    <p class="icon-links">
-                                                        <a href="assets/img/weapons/weapon6.jpg" class="swipebox"><span class="fa fa fa-search-plus"></span></a>
-                                                        <a href="weapons/weapon6.php" class="cbp-singlePage"><span class="fa fa-link"></span></a>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="container">
-                                <div class="row wow fadeInUp">
-                                    <div class="col-md-12 centered">
-                                        <div>
-                                            <h2>Submachine guns/short assault rifles</h2>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <figure class="hover-item">
-                                                <img src="assets/img/weapons/weapon4.jpg" class="img-responsive" alt="image">
-                                                <figcaption>
-                                                    <h2>
-                                                        <?php
-                                                        $model2 = Weapons::findBySql('select * from weapons where kind ="4" LIMIT 1')->all();
-                                                        foreach ($model2 as $item)
-                                                            echo ($item->name);
-                                                        ?>
-                                                    </h2>
-                                                    <p class="icon-links">
-                                                        <a href="assets/img/weapons/weapon4.jpg" class="swipebox"><span class="fa fa fa-search-plus"></span></a>
-                                                        <a href="weapons/weapon4.php" class="cbp-singlePage"><span class="fa fa-link"></span></a>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="container">
-                                <div class="row wow fadeInUp">
-                                    <div class="col-md-12 centered">
-                                        <div>
-                                            <h2>Rifles</h2>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <figure class="hover-item">
-                                                <img src="assets/img/weapons/weapon1.jpg" class="img-responsive" alt="image">
-                                                <figcaption>
-                                                    <h2>
-                                                        <?php
-                                                        $model2 = Weapons::findBySql('select * from weapons where kind ="1" LIMIT 1')->all();
-                                                        foreach ($model2 as $item)
-                                                            echo ($item->name);
-                                                        ?>
-                                                    </h2>
-                                                    <p class="icon-links">
-                                                        <a href="assets/img/weapons/weapon1.jpg" class="swipebox"><span class="fa fa fa-search-plus"></span></a>
-                                                        <a href="weapons/weapon1.php" class="cbp-singlePage"><span class="fa fa-link"></span></a>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </li>
-
-                        <li>
-                            <div class="container">
-                                <div class="row wow fadeInUp">
-                                    <div class="col-md-12 centered">
-                                        <div>
-                                            <h2>Sniper Rifles</h2>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <figure class="hover-item">
-                                                <img src="assets/img/weapons/weapon3.jpg" class="img-responsive" alt="image">
-                                                <figcaption>
-                                                    <h2>
-                                                        <?php
-                                                        $model2 = Weapons::findBySql('select * from weapons where kind ="3" LIMIT 1')->all();
-                                                        foreach ($model2 as $item)
-                                                            echo ($item->name);
-                                                        ?>
-                                                    </h2>
-                                                    <p class="icon-links">
-                                                        <a href="assets/img/weapons/weapon3.jpg" class="swipebox"><span class="fa fa fa-search-plus"></span></a>
-                                                        <a href="weapons/weapon3.php" class="cbp-singlePage"><span class="fa fa-link"></span></a>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="container">
-                                <div class="row wow fadeInUp">
-                                    <div class="col-md-12 centered">
-                                        <div>
-                                            <h2>Pistols</h2>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <figure class="hover-item">
-                                                <img src="assets/img/weapons/weapon5.jpg" class="img-responsive" alt="image">
-                                                <figcaption>
-                                                    <h2>
-                                                        <?php
-                                                        $model2 = Weapons::findBySql('select * from weapons where kind ="5" LIMIT 1')->all();
-                                                        foreach ($model2 as $item)
-                                                            echo ($item->name);
-                                                        ?>
-                                                    </h2>
-                                                    <p class="icon-links">
-                                                        <a href="assets/img/weapons/weapon5.jpg" class="swipebox"><span class="fa fa fa-search-plus"></span></a>
-                                                        <a href="weapons/weapon5.php" class="cbp-singlePage"><span class="fa fa-link"></span></a>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </li>
-
-                        <li>
-                            <div class="container">
-                                <div class="row wow fadeInUp">
-                                    <div class="col-md-12 centered">
-                                        <div>
-                                            <h2>Other support weapons</h2>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <figure class="hover-item">
-                                                <img src="assets/img/weapons/weapon7.jpg" class="img-responsive" alt="image">
-                                                <figcaption>
-                                                    <h2>
-                                                        <?php
-                                                        $model2 = Weapons::findBySql('select * from weapons where kind ="7" LIMIT 1')->all();
-                                                        foreach ($model2 as $item)
-                                                            echo ($item->name);
-                                                        ?>
-                                                    </h2>
-                                                    <p class="icon-links">
-                                                        <a href="assets/img/weapons/weapon7.jpg" class="swipebox"><span class="fa fa fa-search-plus"></span></a>
-                                                        <a href="weapons/weapon7.php" class="cbp-singlePage"><span class="fa fa-link"></span></a>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <section id="login" class="divider-wrapper-a section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg1.jpg" data-speed="0.7">
         <div class="section-inner">
             <div class="container">
@@ -849,51 +455,149 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
                 </div>
             </div>
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <?php $form = ActiveForm::begin(); ?>
+                <div class="col-md-6" style="border: 1px solid #ccc; background-color: #e0e0e0; border-radius: 20px;">
+                    <?php $form = ActiveForm::begin(); ?>
 
-                        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Username') ?>
 
-                        <?= $form->field($model, 'email') ?>
+                    <?= $form->field($model, 'email')->label('Email') ?>
 
-                        <?= $form->field($model, 'suggestion')->textarea(['row' => '6']) ?>
+                    <?= $form->field($model, 'suggestion')->textarea(['rows' => '6'])->label('Suggestion') ?>
 
-                        <div class="form-group">
-                            <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-theme pull-left']) ?>
-                            <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-theme pull-right']) ?>
-
-                        </div>
-
-                        <?php ActiveForm::end(); ?>
+                    <div class="form-group">
+                        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-theme pull-left']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-theme pull-right']) ?>
                     </div>
-                    <div class="col-md-6" style="margin-top:20px;">
-                        <p>The information displayed on the website comes from the Internet, and since it is difficult to find reliable information, some indicators may not reflect the real situation, but we try to select reliable sources for you.If you find errors in the information on the website or have any comments, you can contact us.</p>
-                        <p>Improved own provided blessing may peculiar domestic. Sight house has sex never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case. Invitation at understood occasional sentiments insipidity inhabiting in. Off melancholy alteration principles old. Is do speedily kindness properly oh. Respect article painted cottage he is offices parlors.</p>
-                    </div>
+
+                    <?php ActiveForm::end(); ?>
+                </div>
+
+                <div class="col-md-6" style="margin-top:20px;">
+                    <!-- 引入ECharts库的JavaScript文件，确保路径正确 -->
+                    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+
+                    <!-- 创建一个具有指定ID的容器用于显示热力图 -->
+                    <div id="heatmapChart" style="width: 800px; height: 400px;"></div>
+
+                    <script>
+                        // 获取包含数据的 JavaScript 对象
+                        var data = [{
+                                Region: 'Tokyo, Japan',
+                                'Radiation Dose Rate': 0.12
+                            },
+                            {
+                                Region: 'Chernobyl, Ukraine',
+                                'Radiation Dose Rate': 0.78
+                            },
+                            {
+                                Region: 'Los Angeles, USA',
+                                'Radiation Dose Rate': 0.10
+                            },
+                            {
+                                Region: 'Sellafield, UK',
+                                'Radiation Dose Rate': 0.25
+                            },
+                            {
+                                Region: 'Savannah River, USA',
+                                'Radiation Dose Rate': 0.18
+                            },
+                            {
+                                Region: 'Seversk, Russia',
+                                'Radiation Dose Rate': 0.15
+                            },
+                            {
+                                Region: 'Fukushima, Japan',
+                                'Radiation Dose Rate': 0.30
+                            },
+                            {
+                                Region: 'Paris, France',
+                                'Radiation Dose Rate': 0.08
+                            },
+                            {
+                                Region: 'Beijing, China',
+                                'Radiation Dose Rate': 0.09
+                            },
+                            {
+                                Region: 'Sydney, Australia',
+                                'Radiation Dose Rate': 0.11
+                            }
+                        ];
+
+                        // 获取图表容器
+                        var chartContainer = document.getElementById('heatmapChart');
+
+                        // 创建 ECharts 实例
+                        var myChart = echarts.init(chartContainer);
+
+                        // 提取不同地区的数据
+                        var regions = data.map(item => item.Region);
+                        var doseRates = data.map(item => item['Radiation Dose Rate']);
+
+                        // 配置热力图选项
+                        var option = {
+                            title: {
+                                text: 'Heatmap - Radiation Dose Rate by Region',
+                                left: 'center',
+                                textStyle: {
+                                    fontSize: 16
+                                }
+                            },
+                            tooltip: {
+                                position: 'top'
+                            },
+                            grid: {
+                                height: '50%',
+                                top: '30%',
+                                containLabel: true
+                            },
+                            xAxis: {
+                                type: 'category',
+                                data: regions,
+                                splitArea: {
+                                    show: true
+                                },
+                                axisLabel: {
+                                    rotate: 45, // 45度角度标签以避免重叠
+                                    interval: 0 // 强制显示所有标签
+                                }
+                            },
+                            yAxis: {
+                                type: 'category',
+                                data: ['Radiation Dose Rate'],
+                                splitArea: {
+                                    show: true
+                                }
+                            },
+                            visualMap: {
+                                min: Math.min(...doseRates),
+                                max: Math.max(...doseRates),
+                                calculable: true,
+                                orient: 'horizontal',
+                                left: 'center',
+                                bottom: '15%'
+                            },
+                            series: [{
+                                name: 'Radiation Dose Rate',
+                                type: 'heatmap',
+                                data: data.map(item => [item.Region, 'Radiation Dose Rate', item['Radiation Dose Rate']]),
+                                label: {
+                                    show: true
+                                },
+                                emphasis: {
+                                    itemStyle: {
+                                        shadowBlur: 10,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                }
+                            }]
+                        };
+
+                        // 使用配置项设置热力图
+                        myChart.setOption(option);
+                    </script>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section>
-
-    </section>
-
-    <section id="social-profiles-fw">
-        <div class="nopadding">
-            <div class="social-profile smoothtransition col-xs-3 centered twitter-bg">
-                <a href="#" class="wow fadeInUp"><i class="fa fa-twitter"></i></a>
-            </div>
-            <div class="social-profile smoothtransition col-xs-3 centered facebook-bg">
-                <a href="#" class="wow fadeInUp"><i class="fa fa-facebook"></i></a>
-            </div>
-            <div class="social-profile smoothtransition col-xs-3 centered gplus-bg">
-                <a href="#" class="wow fadeInUp"><i class="fa fa-google-plus"></i></a>
-            </div>
-            <div class="social-profile smoothtransition col-xs-3 centered dribbble-bg">
-                <a href="#" class="wow fadeInUp"><i class="fa fa-dribbble"></i></a>
-            </div>
         </div>
     </section>
 
@@ -905,7 +609,7 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
                     <div class="col-md-3 col-sm-6">
                         <div class="widget about-us-widget">
                             <h4 class="widget-title"><strong>Brief</strong> Introduction</h4>
-                            <p>The site presents different data including battle line graphs, loss data charts, timeline and major events, New York Times news handling and weapons display modules used, and a suggestion and feedback module at the end. </p>
+                            <p>We are a team of students from Nankai University's School of Computer Science, working on an "Internet Database Development" course project. Our website offers comprehensive information on nuclear pollution, including its consequences, global responses, environmental impacts, and health effects. Through visualizations like charts and graphs, we aim to provide clear insights into nuclear pollution data.</p>
                         </div>
                     </div>
 
@@ -965,16 +669,16 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
                         <div class="widget">
                             <h4 class="widget-title"><strong>Latest</strong> Topics</h4>
                             <div class="tagcloud">
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Russian</a>
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Ukraine</a>
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">War</a>
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Time</a>
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Feast</a>
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Battle</a>
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Rival</a>
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Profit</a>
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Key</a>
-                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">U.S</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Pollution</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Environmental contamination</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Air quality</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Water pollution</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Soil contamination</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Industrial emissions</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Greenhouse gases</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Chemical pollutants</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Waste disposal</a>
+                                <a href="#" class="tag-link btn btn-theme btn-white btn-xs" title="3 topics">Environmental degradation</a>
                             </div>
                         </div>
                     </div>
@@ -987,7 +691,7 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <p>Copyright 2023 | Designed By Distinctive Themes and Team Baosha.</p>
+                        <p>Copyright 2023 | Designed By and Team Baosha.</p>
                     </div>
                 </div>
             </div>
@@ -1004,512 +708,5 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
     <script src="assets/js/init.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
-    <script type="text/javascript">
-        var i = document.getElementById('r');
-        var start = 0;
-        $(".c").click(function() {
-            start = 0;
-        });
-        $(".r").click(function() {
-            i.style.display = "block";
-            start = 0;
-        });
-        i.style.display = "none";
-        var j = document.getElementById('l');
-        $(".l").click(function() {
-            j.style.display = "block";
-            start = 1;
-        });
-        j.style.display = "none";
-        j.parentElement.parentElement.style.height = "530px";
-    </script>
 
-    <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart1 = echarts.init(document.getElementById('echarts1'), null, {
-            devicePixelRatio: 2.5
-        });
-        const days = [
-            '5', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-            '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24',
-            '25', '26', '27', '28', '29', '30', '31'
-        ];
-        // prettier-ignore
-        const months = [
-            'March', 'April', 'May', 'June', 'July',
-            'August', 'September', 'October', 'November', 'December'
-        ];
-        // prettier-ignore
-        const data1 = [
-                <?php
-                $model = RCasualties::findBySql('select * from r_casualties where time<"2023-01-01" order by time asc;')->all();
-                $index = 0;
-                $pre = 0;
-                foreach ($model as $item) {
-                    $month = intval(substr(strval(($item->time)), 5, 2)) - 3;
-                    $day = intval(substr(strval(($item->time)), 8, 2)) - 1;
-                    $increase = $item->num - $pre;
-                    echo ('[' . $month . ',' . $day . ',' . $increase . '],');
-                    $pre = $item->num;
-                    if ($month == 1 && $month == 3 && $month == 6 && $month == 8) {
-                        if ($day == 29) {
-                            echo '[' . $month . ',30,0],';
-                        }
-                    }
-                }
-                ?>
-            ]
-            .map(function(item) {
-                return [item[1], item[0], item[2] || '-'];
-            });
-        var option1 = {
-            title: {
-                text: 'Daily Casualties',
-                left: '38%',
-                textStyle: {
-                    fontSize: 30, //字体大小
-                    color: '#3d495d'
-                }
-            },
-            tooltip: {
-                position: 'top'
-            },
-            dataZoom: [{
-                type: 'inside'
-            }],
-            grid: {
-                height: '72%',
-                width: '85%',
-                top: '10%'
-            },
-            xAxis: {
-                type: 'category',
-                data: days,
-                splitArea: {
-                    show: true
-                }
-            },
-            yAxis: {
-                type: 'category',
-                data: months,
-                splitArea: {
-                    show: true
-                }
-            },
-            visualMap: {
-                min: 0,
-                max: 1000,
-                calculable: true,
-                orient: 'horizontal',
-                left: 'center',
-                bottom: '0%',
-                inRange: {
-                    color: ['#D9E9FF', "#0B69E3"]
-                }
-            },
-            series: [{
-                name: 'Casualties Num',
-                type: 'heatmap',
-                bottom: '5%',
-                data: data1,
-                label: {
-                    show: true
-                },
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }]
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart1.setOption(option1);
-    </script>
-
-    <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart2 = echarts.init(document.getElementById('echarts2'), null, {
-            devicePixelRatio: 2.5
-        });
-        $.getJSON('assets/data/echarts2.json', function(data) {
-            var result = [];
-            var result1 = [];
-            var name = [];
-            var name1 = [];
-            $.each(data, function(i, item) {
-                var j = 0;
-                var flag = 0;
-                result1[i] = {
-                    'name': item.armsname,
-                    'value': item.num
-                };
-                name1[i] = item.armsname;
-
-                if (i == 0) {
-                    result.push({
-                        'name': item.category,
-                        'value': item.num
-                    })
-                    name[0] = item.category;
-                } else {
-                    while (j != result.length) {
-                        if (result[j]['name'] == item.category) {
-                            result[j]['value'] += item.num;
-                            flag = 1;
-                            break;
-                        }
-                        j += 1;
-                    }
-                    if (flag == 0) {
-                        result.push({
-                            'name': item.category,
-                            'value': item.num
-                        });
-                        name[j] = item.category;
-                    }
-                }
-            });
-            //alert(name.length);
-            var option2 = {
-                title: {
-                    text: 'The Proportion Of Weapons In The War',
-                    left: '20%',
-                    textStyle: {
-                        fontSize: 30, //字体大小
-                        color: '#241e14'
-                    }
-                },
-                legend: [{
-                        orient: 'vertical',
-                        left: '0%',
-                        top: '5%',
-                        textStyle: {
-                            fontSize: 14
-                        },
-                        data: name
-                    },
-                    {
-                        orient: 'vertical',
-                        left: '8%',
-                        top: '5%',
-                        textStyle: {
-                            fontSize: 12
-                        },
-                        data: name1
-                    }
-                ],
-                color: [
-                    '#988D80',
-                    '#7F4620',
-                    '#624F40',
-                    '#223B3A',
-                    '#532B23',
-                    '#505B59',
-                    '#343231',
-                    '#714641',
-                    '#7289ab',
-                    '#5C4F43',
-                    '#8E5118',
-                    '#998A7E',
-                    '#B6B6B6',
-                    '#414141'
-                ],
-                series: [{
-                        left: '20%',
-                        top: '8%',
-                        type: 'pie',
-                        radius: [0, '30%'],
-                        avoidLabelOverlap: false,
-                        selectedMode: 'single',
-                        label: {
-                            position: 'inner',
-                            fontSize: 14
-                        },
-                        labelLine: {
-                            show: false
-                        },
-                        emphasis: {
-                            label: {
-                                show: true,
-                                fontSize: '30',
-                                fontWeight: 'bold'
-                            }
-                        },
-                        data: result
-                    },
-                    {
-                        left: '20%',
-                        top: '8%',
-                        type: 'pie',
-                        radius: ['50%', '85%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                            formatter: '{b|{b}：}{c}  {per|{d}%}  ',
-                            backgroundColor: '#F6F8FC',
-                            borderColor: '#8C8D8E',
-                            borderWidth: 1,
-                            borderRadius: 4,
-                            rich: {
-                                hr: {
-                                    borderColor: '#8C8D8E',
-                                    width: '100%',
-                                    borderWidth: 1,
-                                    height: 0
-                                },
-                                b: {
-                                    color: '#4C5058',
-                                    fontSize: 12,
-                                    fontWeight: 'bold',
-                                    lineHeight: 32
-                                },
-                                per: {
-                                    color: '#fff',
-                                    backgroundColor: '#4C5058',
-                                    padding: [3, 4],
-                                    fontSize: 12,
-                                    borderRadius: 4
-                                }
-                            }
-                        },
-                        labelLine: {
-                            show: false
-                        },
-                        emphasis: {
-                            label: {
-                                show: true,
-                                fontSize: '30',
-                                fontWeight: 'bold'
-                            }
-                        },
-                        itemStyle: {
-                            borderRadius: 10,
-                            borderColor: '#fff',
-                            borderWidth: 2
-                        },
-                        data: result1
-                    }
-                ]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-            myChart2.setOption(option2);
-        });
-    </script>
-
-    <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart3 = echarts.init(document.getElementById('echarts3'), null, {
-            devicePixelRatio: 2.5
-        });
-        // 指定图表的配置项和数据
-        var result = [];
-        var data = [];
-        $.getJSON('assets/data/echarts3.json', function(data1) {
-            $.each(data1, function(i, item) {
-                result[i] = {
-                    'name': item.armsname,
-                    'value': item.num,
-                    'time': item.time
-                };
-            });
-            var category_num = 0;
-            while (result[category_num]['time'] == result[0]['time'])
-                category_num += 1;
-            var index = 0;
-            for (; index < category_num; index++) {
-                data[index] = [result[index]['value'], result[index]['name']];
-            }
-            var time = result[0]['time'].replace('-', '.');
-            time = time.substr(0, 7);
-            const weaponColors = {
-                '坦克': '#6B2B1F',
-                '飞机': '#414141',
-                '无人机': '#314947',
-                '直升机': '#7F4723',
-                '枪支': '#8C8F8D',
-                '火箭炮': '#4D4732',
-                '防空系统': '#20231B',
-                '船只': '#224161',
-                '汽车和油罐车': '#99826B',
-                '巡航导弹': '#988658',
-            };
-            var option3 = {
-                title: {
-                    text: 'Number Of Weapon Losses',
-                    left: '30%',
-                    textStyle: {
-                        fontSize: 30, //字体大小
-                        color: '#221414'
-                    }
-                },
-                xAxis: {
-                    max: 'dataMax',
-                },
-                grid: {
-                    top: 30,
-                    bottom: 30,
-                    left: 150,
-                    right: 80
-                },
-                yAxis: {
-                    type: 'category',
-                    inverse: true,
-                    animationDuration: 300,
-                    animationDurationUpdate: 300,
-                    max: 9, // only the largest 3 bars will be displayed
-                    rich: {
-                        flag: {
-                            fontSize: 25,
-                            padding: 5
-                        }
-                    }
-                },
-                series: [{
-                    realtimeSort: true,
-                    top: '10%',
-                    type: 'bar',
-                    data: data,
-                    seriesLayoutBy: 'column',
-                    itemStyle: {
-                        color: function(param) {
-                            return weaponColors[param.value[1]] || '#5470c6';
-                        }
-                    },
-                    encode: {
-                        x: 0,
-                        y: 3,
-                    },
-                    label: {
-                        show: true,
-                        precision: 0,
-                        position: 'right',
-                        valueAnimation: true,
-                        fontFamily: 'monospace'
-                    }
-                }],
-                animationDuration: 3000,
-                animationDurationUpdate: 3000,
-                animationEasing: 'linear',
-                animationEasingUpdate: 'linear',
-                graphic: {
-                    elements: [{
-                        type: 'text',
-                        right: 0,
-                        bottom: 60,
-                        style: {
-                            text: time.toString(),
-                            font: 'bolder 80px monospace',
-                            fill: 'rgba(100, 100, 100, 0.25)'
-                        },
-                        z: 100
-                    }]
-                }
-            };
-
-            function update() {
-                if (start == 1) {
-                    var data = option3.series[0].data;
-                    if (index == result.length)
-                        return;
-                    for (var i = 0; i < category_num; ++i) {
-                        //data[i]['name']=result[index+i]['name'];
-                        //data[i]['value']=result[index+i]['value'];
-                        data[i] = [result[index + i]['value'], result[index + i]['name']];
-                    }
-                    time = result[index]['time'].replace('-', '.');
-                    time = time.substr(0, 7);
-                    index += category_num;
-                    option3.series[0].data = data;
-                    option3.graphic.elements[0].style.text = time;
-                    myChart3.setOption(option3);
-                }
-            }
-            setInterval(function() {
-                update();
-            }, 100);
-            // 使用刚指定的配置项和数据显示图表。
-            myChart3.setOption(option3);
-        });
-    </script>
-
-    <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart4 = echarts.init(document.getElementById('echarts4'), null, {
-            devicePixelRatio: 2.5
-        });
-        // 指定图表的配置项和数据
-        // prettier-ignore
-        var data4 = [
-            <?php
-            $model4 = CountryNum::findBySql('select * from country_num;')->all();
-            $index = 0;
-            $pre = 0;
-            foreach ($model4 as $item) {
-                echo ('["' . $item->country_name . '", ' . $item->num . '],');
-            }
-            ?>
-        ]
-
-        var option4 = {
-            title: {
-                text: "Nationality Of Weapon Companies",
-                left: '18%',
-                textStyle: {
-                    fontSize: 30, //字体大小
-                    color: '#221414'
-                }
-            },
-            xAxis: {
-                type: 'category',
-                name: 'country',
-                nameTextStyle: { //x坐标轴名称的字体样式
-                    color: '#221414',
-                    fontSize: 16
-                }
-            },
-            dataZoom: [{
-                type: 'inside'
-            }],
-            yAxis: {
-                type: 'value',
-                name: 'Company num',
-                nameTextStyle: {
-                    color: '#221414',
-                    fontSize: 16
-                }
-            },
-            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                    offset: 0,
-                    color: '#988D80'
-                },
-                {
-                    offset: 1,
-                    color: '#7F4620'
-                }
-            ]),
-
-            series: [{
-                type: 'bar',
-                showBackground: true,
-                backgroundStyle: {
-                    color: 'rgba(180, 180, 180, 0.2)'
-                },
-                data: data4,
-                avoidLabelOverlap: false,
-                selectedMode: 'single',
-                label: {
-                    position: 'outer',
-                    fontSize: 14
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '30',
-                        fontWeight: 'bold'
-                    }
-                }
-            }]
-        };
-        myChart4.setOption(option4);
-    </script>
 </body>
