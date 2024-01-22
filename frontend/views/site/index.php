@@ -1033,108 +1033,111 @@ if (Yii::$app->session->getFlash('login') == 'Have not logged in.') {
         </div>
     </section>
 
-    <?php
-    // 数据提取，这里是示例数据
-    $data = [
-        ['Thyroid Cancer', 0.15],
-        ['Leukemia', 0.25],
-        ['Lung Cancer', 0.10],
-        ['Birth Defects', 0.30],
-        ['Genetic Disorders', 0.20],
-        ['Thyroid Abnormalities', 0.12],
-        ['Skin Diseases', 0.18],
-        ['Respiratory Issues', 0.08],
-        ['Cataracts', 0.10],
-        ['Cardiovascular Diseases', 0.14],
-    ];
+    <section style="margin:7%">
+        <?php
+        // 数据提取，这里是示例数据
+        $data = [
+            ['Thyroid Cancer', 0.15],
+            ['Leukemia', 0.25],
+            ['Lung Cancer', 0.10],
+            ['Birth Defects', 0.30],
+            ['Genetic Disorders', 0.20],
+            ['Thyroid Abnormalities', 0.12],
+            ['Skin Diseases', 0.18],
+            ['Respiratory Issues', 0.08],
+            ['Cataracts', 0.10],
+            ['Cardiovascular Diseases', 0.14],
+        ];
 
-    // 将数据格式化为ECharts折线图所需的格式
-    $categories = [];
-    $values = [];
-    foreach ($data as $item) {
-        $categories[] = $item[0]; // 健康状况
-        $values[] = $item[1];     // 辐射剂量
-    }
-    $categories = json_encode($categories);
-    $values = json_encode($values);
-    ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
-    <div id="lineChart" style="width: 100%; height: 500px;"></div>
-
-    <script>
-        // 初始化ECharts实例
-        var myChart = echarts.init(document.getElementById('lineChart'));
-
-        // 配置项
-        var option = {
-            title: {
-                text: '辐射的危害',
-                subtext: '单位：辐射剂量（mSv）',
-                x: 'center'
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            xAxis: {
-                type: 'category',
-                data: <?= $categories ?>,
-                axisLabel: {
-                    interval: 0, // 使x轴标签全部显示
-                    rotate: 45, // 旋转45度，防止标签重叠
-                }
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [{
-                name: '辐射剂量',
-                type: 'line',
-                data: <?= $values ?>,
-                markPoint: {
-                    data: [{
-                            type: 'max',
-                            name: '最大值'
-                        },
-                        {
-                            type: 'min',
-                            name: '最小值'
-                        }
-                    ]
-                }
-            }]
-        };
-
-        // 使用配置项显示折线图
-        myChart.setOption(option);
-    </script>
-
-    <style>
-        .text-box {
-            border: 2px solid #666;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            font-family: '楷体', cursive;
-            color: grey;
-            margin: 50px; /* 添加外边距 */
+        // 将数据格式化为ECharts折线图所需的格式
+        $categories = [];
+        $values = [];
+        foreach ($data as $item) {
+            $categories[] = $item[0]; // 健康状况
+            $values[] = $item[1];     // 辐射剂量
         }
-    </style>
-    <div class="text-box">
-        <div>
-            <p>
-                可见，辐射是一种潜在的危险，对人体健康产生严重的影响。研究表明，暴露在高辐射水平下会导致一系列健康问题，其中包括甲状腺癌、白血病、肺癌等。辐射暴露还可能导致遗传突变和出生缺陷。这些健康问题的严重性取决于辐射剂量和暴露时间。因此，保护自己免受辐射的危害至关重要，特别是在核事故或放射性污染的区域。
-            </p>
+        $categories = json_encode($categories);
+        $values = json_encode($values);
+        ?>
+
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+        <div id="lineChart" style="width: 100%; height: 500px;"></div>
+
+        <script>
+            // 初始化ECharts实例
+            var myChart = echarts.init(document.getElementById('lineChart'));
+
+            // 配置项
+            var option = {
+                title: {
+                    text: '辐射的危害',
+                    subtext: '单位：辐射剂量（mSv）',
+                    x: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: <?= $categories ?>,
+                    axisLabel: {
+                        interval: 0, // 使x轴标签全部显示
+                        rotate: 45, // 旋转45度，防止标签重叠
+                    }
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '辐射剂量',
+                    type: 'line',
+                    data: <?= $values ?>,
+                    markPoint: {
+                        data: [{
+                                type: 'max',
+                                name: '最大值'
+                            },
+                            {
+                                type: 'min',
+                                name: '最小值'
+                            }
+                        ]
+                    }
+                }]
+            };
+
+            // 使用配置项显示折线图
+            myChart.setOption(option);
+        </script>
+
+        <style>
+            .text-box {
+                border: 2px solid #666;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                font-family: '楷体', cursive;
+                color: grey;
+                margin: 7%;
+                /* 添加外边距 */
+            }
+        </style>
+        <div class="text-box">
+            <div>
+                <p>
+                    可见，辐射是一种潜在的危险，对人体健康产生严重的影响。研究表明，暴露在高辐射水平下会导致一系列健康问题，其中包括甲状腺癌、白血病、肺癌等。辐射暴露还可能导致遗传突变和出生缺陷。这些健康问题的严重性取决于辐射剂量和暴露时间。因此，保护自己免受辐射的危害至关重要，特别是在核事故或放射性污染的区域。
+                </p>
+            </div>
+            <div>
+                <p>
+                    为减少核污染的风险，采取一系列措施是至关重要的。首先，核能发电站和核设施必须采取高度严格的安全措施，以防止事故和泄漏的发生。其次，需要制定严格的法规和监管机制，确保核设施的运营符合最高的安全标准。此外，核废料的储存和处理也需要特别小心，以避免对环境和人类健康造成潜在风险。最后，提高公众对核能和辐射的认知是非常重要的，以便人们能够更好地理解潜在的危险，并采取适当的预防措施。通过这些措施，我们可以最大程度地减少核污染的风险，确保人类和环境的安全。
+                </p>
+            </div>
         </div>
-        <div>
-            <p>
-                为减少核污染的风险，采取一系列措施是至关重要的。首先，核能发电站和核设施必须采取高度严格的安全措施，以防止事故和泄漏的发生。其次，需要制定严格的法规和监管机制，确保核设施的运营符合最高的安全标准。此外，核废料的储存和处理也需要特别小心，以避免对环境和人类健康造成潜在风险。最后，提高公众对核能和辐射的认知是非常重要的，以便人们能够更好地理解潜在的危险，并采取适当的预防措施。通过这些措施，我们可以最大程度地减少核污染的风险，确保人类和环境的安全。
-            </p>
-        </div>
-    </div>
+    </section>
 
 
-    <section id="contact" class="white section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg-bw.jpg" data-speed="0.7">
+    <section id="contact" class="white section-wrapper opaqued" data-parallax="scroll" data-image-src="assets/img/bg/bg-bw.jpg" data-speed="0.7" style="margin-top: 50px;">
         <div class="section-inner padding">
             <div class="container">
                 <div class="row">
